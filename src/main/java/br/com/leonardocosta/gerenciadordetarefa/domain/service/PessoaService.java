@@ -23,4 +23,8 @@ public class PessoaService {
         return repository.findById(pessoaId)
                 .orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
     }
+
+    public void removerPessoa(final Long pessoaId) {
+        repository.deleteById(pessoaId);
+    }
 }

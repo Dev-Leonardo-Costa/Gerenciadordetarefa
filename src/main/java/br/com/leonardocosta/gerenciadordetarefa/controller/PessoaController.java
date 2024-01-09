@@ -16,4 +16,8 @@ public interface PessoaController {
     @PutMapping("/{pessoaId}")
     ResponseEntity<Pessoa> alterar(@PathVariable final Long pessoaId, @RequestBody final Pessoa pessoa);
 
+    @DeleteMapping("/{pessoaId}")
+    ResponseEntity<?> remover(@PathVariable final Long pessoaId);
+
+
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 
 @RestController
@@ -46,6 +47,13 @@ public class PessoaControllerImpl implements PessoaController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @Override
+    public ResponseEntity<?> remover(final Long pessoaId) {
+        Pessoa pessoaExiste = service.buscarPorId(pessoaId);
+        service.removerPessoa(pessoaExiste.getId());
+        return ResponseEntity.noContent().build();
     }
 
 }
