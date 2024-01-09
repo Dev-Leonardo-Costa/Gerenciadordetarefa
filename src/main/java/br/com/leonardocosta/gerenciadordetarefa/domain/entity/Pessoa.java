@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @NoArgsConstructor
@@ -19,5 +21,10 @@ public class Pessoa {
     private Long id;
 
     private String nome;
+
+    private String departamento;
+
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
+    private List<Tarefa> tarefas = new ArrayList<>();
 
 }
