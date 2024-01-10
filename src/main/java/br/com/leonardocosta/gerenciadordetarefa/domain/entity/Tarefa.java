@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,13 +26,14 @@ public class Tarefa {
 
     private String departamento;
 
-    private LocalDate prazo;
+    private Date prazo;
 
     private int duracao;
 
     private boolean finalizado;
 
     @ManyToOne
-    @JoinColumn(name = "pessoa_id", nullable = false)
+    @JoinColumn(name = "pessoa_id")
     private Pessoa pessoa;
+
 }
