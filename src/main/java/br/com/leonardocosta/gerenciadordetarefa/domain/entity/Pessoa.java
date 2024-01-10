@@ -20,8 +20,6 @@ public class Pessoa {
 
     private String nome;
 
-    private String departamento;
-
     @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
     private List<Tarefa> tarefas = new ArrayList<>();
 

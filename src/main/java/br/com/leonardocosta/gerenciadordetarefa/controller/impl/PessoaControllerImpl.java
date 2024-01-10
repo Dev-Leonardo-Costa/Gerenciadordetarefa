@@ -41,8 +41,7 @@ public class PessoaControllerImpl implements PessoaController {
 
         if (pessoaExistente != null) {
             pessoaExistente.setNome(pessoa.getNome());
-            pessoaExistente.setDepartamento(pessoa.getDepartamento());
-            Pessoa pessoaAtualizada = service.salvar(pessoaExistente);
+            service.salvar(pessoaExistente);
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
