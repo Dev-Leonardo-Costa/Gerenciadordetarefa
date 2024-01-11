@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 @RequiredArgsConstructor
 @RestController
@@ -27,12 +26,8 @@ public class TarefaControllerImpl implements TarefaController {
 
     @Override
     public ResponseEntity<Tarefa> alocar(final Long tarefaId, final Long pessoaId) {
-        try {
-            service.alocar(tarefaId, pessoaId);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(null);
-        }
+        service.alocar(tarefaId, pessoaId);
+        return ResponseEntity.noContent().build();
     }
 
     @Override

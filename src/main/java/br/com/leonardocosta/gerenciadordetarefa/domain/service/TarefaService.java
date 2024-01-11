@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TarefaService {
 
-    public static final String TAREFA_NÃO_ENCONTRADA = "Tarefa não encontrada, código: ";
+    public static final String TAREFA_NAO_ENCONTRADA = "Tarefa não encontrada de código: ";
     public static final String ESTA_TAREFA_JA_FOI_CONCLUIDA = "Esta tarefa já foi concluída anteriormente";
     public static final String ESTA_TAREFA_NAO_ESTA_ASSOCIADA = "Esta tarefa não está associada a uma pessoa";
 
@@ -34,7 +34,7 @@ public class TarefaService {
 
     public Tarefa buscarPorId(final Long tarefaId) {
         return repository.findById(tarefaId)
-                .orElseThrow(() -> new NotFoundException(TAREFA_NÃO_ENCONTRADA + tarefaId));
+                .orElseThrow(() -> new NotFoundException(TAREFA_NAO_ENCONTRADA + tarefaId));
     }
 
     public Tarefa finalizarTarefa(final Long tarefaId) {
@@ -46,7 +46,7 @@ public class TarefaService {
 
     private static void validarTarefaParaConclusao(Tarefa tarefa) {
         if (tarefa.isFinalizada()) {
-            throw new TarefaFinalizadaException(ESTA_TAREFA_JA_FOI_CONCLUIDA);
+            throw new TarefaFinalizadaException(ESTA_TAREFA_JA_FOI_CONCLUIDA + tarefa);
         }
 
         if (tarefa.getPessoa() == null) {

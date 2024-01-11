@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 
 @RequiredArgsConstructor
@@ -32,16 +33,8 @@ public class PessoaControllerImpl implements PessoaController {
 
     @Override
     public ResponseEntity<Pessoa> alterar(final Long pessoaId, final Pessoa pessoa) {
-
-        Pessoa pessoaExistente = service.buscarPorId(pessoaId);
-
-        if (pessoaExistente != null) {
-            pessoaExistente.setNome(pessoa.getNome());
-            service.salvar(pessoaExistente);
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        service.alterar(pessoaId,pessoa);
+        return ResponseEntity.status(NO_CONTENT).build();
     }
 
     @Override
