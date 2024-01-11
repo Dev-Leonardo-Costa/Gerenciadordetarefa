@@ -3,24 +3,20 @@ package br.com.leonardocosta.gerenciadordetarefa.controller.impl;
 import br.com.leonardocosta.gerenciadordetarefa.controller.PessoaController;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.service.PessoaService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/pessoas")
 public class PessoaControllerImpl implements PessoaController {
-    private final PessoaService service;
 
-    @Autowired
-    public PessoaControllerImpl(PessoaService service) {
-        this.service = service;
-    }
+    private final PessoaService service;
 
     @Override
     public ResponseEntity<Void> registrar(final Pessoa pessoa) {
