@@ -13,8 +13,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TarefaService {
 
-    private final TarefaRepository repository;
+    public static final String TAREFA_NÃO_ENCONTRADA = "Tarefa não encontrada, código: ";
+    public static final String ESTA_TAREFA_JA_FOI_CONCLUIDA = "Esta tarefa já foi concluída anteriormente";
+    public static final String ESTA_TAREFA_NAO_ESTA_ASSOCIADA = "Esta tarefa não está associada a uma pessoa";
 
+    private final TarefaRepository repository;
     private final PessoaService pessoaService;
 
     public Tarefa salvar(TarefaRecord tarefa) {
@@ -31,22 +34,24 @@ public class TarefaService {
 
     public Tarefa buscarPorId(final Long tarefaId) {
         return repository.findById(tarefaId)
-                .orElseThrow(() -> new NotFoundException("Tarefa não encontrada, código: " + tarefaId));
+                .orElseThrow(() -> new NotFoundException(TAREFA_NÃO_ENCONTRADA + tarefaId));
     }
 
     public Tarefa finalizarTarefa(final Long tarefaId) {
         var tarefa = buscarPorId(tarefaId);
+        validarTarefaParaConclusao(tarefa);
+        tarefa.setFinalizado(true);
+        return repository.save(tarefa);
+    }
 
+    private static void validarTarefaParaConclusao(Tarefa tarefa) {
         if (tarefa.isFinalizada()) {
-            throw new TarefaFinalizadaException("Tarefa já se encontra finalizada");
+            throw new TarefaFinalizadaException(ESTA_TAREFA_JA_FOI_CONCLUIDA);
         }
 
         if (tarefa.getPessoa() == null) {
-            throw new NotFoundException("A tarefa não está associada a uma pessoa");
+            throw new NotFoundException(ESTA_TAREFA_NAO_ESTA_ASSOCIADA);
         }
-
-        tarefa.setFinalizado(true);
-        return repository.save(tarefa);
     }
 
 
