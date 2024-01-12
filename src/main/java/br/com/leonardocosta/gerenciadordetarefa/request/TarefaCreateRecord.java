@@ -1,10 +1,8 @@
 package br.com.leonardocosta.gerenciadordetarefa.request;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
-public record TarefaRecord(
+public record TarefaCreateRecord(
 
         String titulo,
 
@@ -14,7 +12,6 @@ public record TarefaRecord(
 
         Date prazo,
 
-        int duracao,
+        int duracao
 
-        boolean finalizado
 ) { }

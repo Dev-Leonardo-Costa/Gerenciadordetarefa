@@ -5,7 +5,7 @@ import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Tarefa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.exception.NotFoundException;
 import br.com.leonardocosta.gerenciadordetarefa.domain.exception.TarefaFinalizadaException;
 import br.com.leonardocosta.gerenciadordetarefa.domain.repository.TarefaRepository;
-import br.com.leonardocosta.gerenciadordetarefa.request.TarefaRecord;
+import br.com.leonardocosta.gerenciadordetarefa.request.TarefaCreateRecord;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ public class TarefaService {
     private final TarefaRepository repository;
     private final PessoaService pessoaService;
 
-    public Tarefa salvar(TarefaRecord tarefa) {
+    public Tarefa salvar(TarefaCreateRecord tarefa) {
         Tarefa entidade = Tarefa.fromTo(tarefa);
         return repository.save(entidade);
     }

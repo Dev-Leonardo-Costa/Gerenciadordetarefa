@@ -1,13 +1,14 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.entity;
 
 
-import br.com.leonardocosta.gerenciadordetarefa.request.TarefaRecord;
+import br.com.leonardocosta.gerenciadordetarefa.request.TarefaCreateRecord;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @NoArgsConstructor
@@ -15,7 +16,9 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "TAREFA")
-public class Tarefa {
+public class Tarefa implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,36 +28,34 @@ public class Tarefa {
 
     private String descricao;
 
-    private String departamento;
-
     private Date prazo;
+
+    private String departamento;
 
     private int duracao;
 
-    private boolean finalizado;
+    private boolean finalizado = false;
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "pessoa_id")
     private Pessoa pessoa;
 
-    public Tarefa(String titulo, String descricao, String departamento, Date prazo, int duracao, boolean finalizado) {
+    public Tarefa(String titulo, String descricao, Date prazo, String departamento, int duracao) {
         this.titulo = titulo;
         this.descricao = descricao;
-        this.departamento = departamento;
         this.prazo = prazo;
+        this.departamento = departamento;
         this.duracao = duracao;
-        this.finalizado = finalizado;
     }
 
-    public static Tarefa fromTo(TarefaRecord tarefa) {
+    public static Tarefa fromTo(TarefaCreateRecord tarefa) {
         var entidade = new Tarefa(
                 tarefa.titulo(),
                 tarefa.descricao(),
-                tarefa.departamento(),
                 tarefa.prazo(),
-                tarefa.duracao(),
-                tarefa.finalizado()
+                tarefa.departamento(),
+                tarefa.duracao()
         );
         return entidade;
     }

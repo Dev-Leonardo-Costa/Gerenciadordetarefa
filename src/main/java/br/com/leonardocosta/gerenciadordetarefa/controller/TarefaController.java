@@ -1,14 +1,14 @@
 package br.com.leonardocosta.gerenciadordetarefa.controller;
 
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Tarefa;
-import br.com.leonardocosta.gerenciadordetarefa.request.TarefaRecord;
+import br.com.leonardocosta.gerenciadordetarefa.request.TarefaCreateRecord;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 public interface TarefaController {
 
     @PostMapping
-    ResponseEntity<Void> adiconarTarefa(@RequestBody TarefaRecord tarefa);
+    ResponseEntity<Void> adiconarTarefa(@RequestBody TarefaCreateRecord tarefa);
 
     @PutMapping("/alocar/{tarefaId}")
     ResponseEntity<Tarefa> alocar(@PathVariable final Long tarefaId, @RequestParam final Long pessoaId);
@@ -17,6 +17,6 @@ public interface TarefaController {
     ResponseEntity<Tarefa> buscar(@PathVariable Long id);
 
     @PutMapping("/finalizar/{tarefaId}")
-    public ResponseEntity<Tarefa> finalizarTarefa(@PathVariable Long tarefaId);
+    ResponseEntity<Tarefa> finalizarTarefa(@PathVariable Long tarefaId);
 
 }

@@ -3,7 +3,7 @@ package br.com.leonardocosta.gerenciadordetarefa.controller.impl;
 import br.com.leonardocosta.gerenciadordetarefa.controller.TarefaController;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Tarefa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.service.TarefaService;
-import br.com.leonardocosta.gerenciadordetarefa.request.TarefaRecord;
+import br.com.leonardocosta.gerenciadordetarefa.request.TarefaCreateRecord;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +19,7 @@ public class TarefaControllerImpl implements TarefaController {
     private final TarefaService service;
 
     @Override
-    public ResponseEntity<Void> adiconarTarefa(TarefaRecord tarefa) {
+    public ResponseEntity<Void> adiconarTarefa(TarefaCreateRecord tarefa) {
         service.salvar(tarefa);
         return ResponseEntity.status(CREATED.value()).build();
     }
