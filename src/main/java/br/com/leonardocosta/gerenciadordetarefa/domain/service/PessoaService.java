@@ -56,8 +56,7 @@ public class PessoaService {
     }
 
     private int calcularTotalHorasTarefas(Long pessoaId) {
-        Pessoa pessoa = repository.findById(pessoaId)
-                .orElseThrow(() -> new NotFoundException("Pessoa não encontrada de código: " + pessoaId));
+        Pessoa pessoa = buscarPorId(pessoaId);
         return pessoa.horas();
     }
 
