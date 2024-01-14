@@ -1,5 +1,6 @@
 package br.com.leonardocosta.gerenciadordetarefa.controller;
 
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.DepartamentoDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import org.springframework.http.ResponseEntity;

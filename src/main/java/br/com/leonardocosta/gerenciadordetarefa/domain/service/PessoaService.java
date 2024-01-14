@@ -1,5 +1,6 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.service;
 
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.DepartamentoDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.exception.NotFoundException;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -38,6 +40,18 @@ public class PessoaService {
     public List<PessoaDTO> listarInformacoesPessoas() {
         List<Pessoa> pessoas = repository.findAll();
         return getPessoaDTOS(pessoas);
+    }
+
+    public List<DepartamentoDTO> listarDepartamentosComQuantidadeDePessoasETarefas() {
+        List<Object[]> resultados = repository.listarDepartamentosComQuantidadeDePessoasETarefas();
+
+        return resultados.stream()
+                .map(result -> new DepartamentoDTO(
+                        (String) result[0],
+                        ((Number) result[1]).longValue(),
+                        ((Number) result[2]).longValue()
+                ))
+                .collect(Collectors.toList());
     }
 
     private List<PessoaDTO> getPessoaDTOS(List<Pessoa> pessoas) {

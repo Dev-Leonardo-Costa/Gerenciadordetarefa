@@ -1,6 +1,7 @@
 package br.com.leonardocosta.gerenciadordetarefa.controller.impl;
 
 import br.com.leonardocosta.gerenciadordetarefa.controller.PessoaController;
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.DepartamentoDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.service.PessoaService;
@@ -52,5 +53,6 @@ public class PessoaControllerImpl implements PessoaController {
         List<PessoaDTO> pessoasDTO = service.listarInformacoesPessoas();
         return ResponseEntity.ok(pessoasDTO);
     }
+
 
 }
