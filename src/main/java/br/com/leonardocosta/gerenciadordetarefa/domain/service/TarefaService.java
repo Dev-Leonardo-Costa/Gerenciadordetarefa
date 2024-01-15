@@ -46,7 +46,7 @@ public class TarefaService {
 
     private static void validarTarefaParaConclusao(Tarefa tarefa) {
         if (tarefa.isFinalizada()) {
-            throw new TarefaFinalizadaException(ESTA_TAREFA_JA_FOI_CONCLUIDA + tarefa);
+            throw new TarefaFinalizadaException(ESTA_TAREFA_JA_FOI_CONCLUIDA);
         }
 
         if (tarefa.getPessoa() == null) {

@@ -24,7 +24,7 @@ public class PessoaService {
 
     public Pessoa buscarPorId(final Long pessoaId) {
         return repository.findById(pessoaId)
-                .orElseThrow(() -> new NotFoundException("Pessoa não encontrada de código: " + pessoaId)); // criar a exception personalizada depois
+                .orElseThrow(() -> new NotFoundException("Pessoa não encontrada de código: " + pessoaId));
     }
 
     public void removerPessoa(final Long pessoaId) {
