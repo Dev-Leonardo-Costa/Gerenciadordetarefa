@@ -2,6 +2,7 @@ package br.com.leonardocosta.gerenciadordetarefa.domain.entity;
 
 
 import br.com.leonardocosta.gerenciadordetarefa.request.TarefaCreateRecord;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,13 +29,14 @@ public class Tarefa implements Serializable {
 
     private String descricao;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date prazo;
 
     private String departamento;
 
     private int duracao;
 
-    private boolean finalizado = false;
+    private Boolean finalizado;
 
     @JsonIgnore
     @ManyToOne
@@ -47,6 +49,7 @@ public class Tarefa implements Serializable {
         this.prazo = prazo;
         this.departamento = departamento;
         this.duracao = duracao;
+        this.finalizado = false;
     }
 
     public static Tarefa fromTo(TarefaCreateRecord tarefa) {
@@ -60,7 +63,7 @@ public class Tarefa implements Serializable {
         return entidade;
     }
 
-    public boolean isFinalizada() {
+    public Boolean isFinalizado() {
         return finalizado;
     }
 

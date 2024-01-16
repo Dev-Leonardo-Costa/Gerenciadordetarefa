@@ -9,6 +9,8 @@ import br.com.leonardocosta.gerenciadordetarefa.request.TarefaCreateRecord;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class TarefaService {
@@ -44,8 +46,16 @@ public class TarefaService {
         return repository.save(tarefa);
     }
 
-    private static void validarTarefaParaConclusao(Tarefa tarefa) {
-        if (tarefa.isFinalizada()) {
+    public List<Tarefa> listarTarefasPendentesMaisAntigas(int limit) {
+        return repository.listarTarefasPendentesMaisAntigas(limit);
+    }
+
+    public List<Tarefa> listarTarefasPendentesMaisAntigasDeAcordoComOEnpointQUeFoiPedido() {
+        return repository.listarTarefasPendentesMaisAntigasDeAcordoComOEnpointQUeFoiPedido();
+    }
+
+    private void validarTarefaParaConclusao(Tarefa tarefa) {
+        if (tarefa.isFinalizado()) {
             throw new TarefaFinalizadaException(ESTA_TAREFA_JA_FOI_CONCLUIDA);
         }
 
@@ -53,6 +63,5 @@ public class TarefaService {
             throw new NotFoundException(ESTA_TAREFA_NAO_ESTA_ASSOCIADA);
         }
     }
-
 
 }

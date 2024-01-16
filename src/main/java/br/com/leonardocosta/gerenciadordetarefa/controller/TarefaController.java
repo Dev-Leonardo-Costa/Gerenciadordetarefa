@@ -5,6 +5,8 @@ import br.com.leonardocosta.gerenciadordetarefa.request.TarefaCreateRecord;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 public interface TarefaController {
 
     @PostMapping
@@ -18,5 +20,11 @@ public interface TarefaController {
 
     @PutMapping("/finalizar/{tarefaId}")
     ResponseEntity<Tarefa> finalizarTarefa(@PathVariable Long tarefaId);
+
+    @GetMapping("/pendentes-meu")
+    ResponseEntity<List<Tarefa>> listarTarefasPendentesMaisAntigas(@RequestParam(defaultValue = "3") int limit);
+
+    @GetMapping("/pendentes")
+    ResponseEntity<List<Tarefa>> listarTarefasPendentesMaisAntigas();
 
 }

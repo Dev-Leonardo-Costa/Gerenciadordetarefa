@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 import static org.springframework.http.HttpStatus.CREATED;
 
 @RequiredArgsConstructor
@@ -39,6 +41,18 @@ public class TarefaControllerImpl implements TarefaController {
     public ResponseEntity<Tarefa> finalizarTarefa(final Long tarefaId) {
         service.finalizarTarefa(tarefaId);
         return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public ResponseEntity<List<Tarefa>> listarTarefasPendentesMaisAntigas(int limit) {
+        List<Tarefa> tarefas = service.listarTarefasPendentesMaisAntigas(limit);
+        return ResponseEntity.ok(tarefas);
+    }
+
+    @Override
+    public ResponseEntity<List<Tarefa>> listarTarefasPendentesMaisAntigas() {
+        List<Tarefa> tarefas = service.listarTarefasPendentesMaisAntigasDeAcordoComOEnpointQUeFoiPedido();
+        return ResponseEntity.ok(tarefas);
     }
 
 }
