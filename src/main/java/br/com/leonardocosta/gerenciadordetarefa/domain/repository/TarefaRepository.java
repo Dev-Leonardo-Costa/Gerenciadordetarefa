@@ -21,7 +21,7 @@ public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
     List<Tarefa> listarTarefasPendentesMaisAntigas(@Param("limit") int limit);
 
     @Query("SELECT t FROM Tarefa t WHERE t.pessoa IS NULL ORDER BY t.prazo ASC LIMIT 3")
-    List<Tarefa> listarTarefasPendentesMaisAntigasDeAcordoComOEnpointQUeFoiPedido();
+    List<Tarefa> listarTarefasPendentes();
 
 }
 

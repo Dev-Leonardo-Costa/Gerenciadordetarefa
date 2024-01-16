@@ -51,7 +51,7 @@ public class TarefaService {
     }
 
     public List<Tarefa> listarTarefasPendentesMaisAntigasDeAcordoComOEnpointQUeFoiPedido() {
-        return repository.listarTarefasPendentesMaisAntigasDeAcordoComOEnpointQUeFoiPedido();
+        return repository.listarTarefasPendentes();
     }
 
     private void validarTarefaParaConclusao(Tarefa tarefa) {
