@@ -2,6 +2,7 @@ package br.com.leonardocosta.gerenciadordetarefa.domain.service;
 
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.DepartamentoDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaGastosDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.exception.NotFoundException;
 import br.com.leonardocosta.gerenciadordetarefa.domain.repository.PessoaRepository;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,6 +54,21 @@ public class PessoaService {
                         ((Number) result[2]).longValue()
                 ))
                 .collect(Collectors.toList());
+    }
+
+    public List<PessoaGastosDTO> buscarPessoasPorNomeEPeriodo(String nome, Date dataInicio, Date dataFim) {
+        List<Object[]> resultados = repository.buscarPessoasPorNomeEPeriodo(nome, dataInicio, dataFim);
+        List<PessoaGastosDTO> dtos = new ArrayList<>();
+
+        for (Object[] resultado : resultados) {
+            String nomePessoa = (String) resultado[0];
+            Double mediaHorasGastas = (Double) resultado[1];
+
+            PessoaGastosDTO dto = new PessoaGastosDTO(nomePessoa, mediaHorasGastas);
+            dtos.add(dto);
+        }
+
+        return dtos;
     }
 
     private List<PessoaDTO> getPessoaDTOS(List<Pessoa> pessoas) {

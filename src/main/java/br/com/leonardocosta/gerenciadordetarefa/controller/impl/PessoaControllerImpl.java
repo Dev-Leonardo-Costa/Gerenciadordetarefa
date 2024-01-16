@@ -3,6 +3,7 @@ package br.com.leonardocosta.gerenciadordetarefa.controller.impl;
 import br.com.leonardocosta.gerenciadordetarefa.controller.PessoaController;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.DepartamentoDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaGastosDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.service.PessoaService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -52,6 +54,12 @@ public class PessoaControllerImpl implements PessoaController {
     public ResponseEntity<List<PessoaDTO>> listarPessoa() {
         List<PessoaDTO> pessoasDTO = service.listarInformacoesPessoas();
         return ResponseEntity.ok(pessoasDTO);
+    }
+
+    @Override
+    public ResponseEntity<List<PessoaGastosDTO>> buscarPessoasPorNomeEPeriodo(String nome, Date dataInicio, Date dataFim) {
+        List<PessoaGastosDTO> pessoasGastos = service.buscarPessoasPorNomeEPeriodo(nome, dataInicio, dataFim);
+        return ResponseEntity.ok(pessoasGastos);
     }
 
 

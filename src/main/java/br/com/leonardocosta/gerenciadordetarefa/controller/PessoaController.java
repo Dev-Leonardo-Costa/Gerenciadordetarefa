@@ -2,10 +2,13 @@ package br.com.leonardocosta.gerenciadordetarefa.controller;
 
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.DepartamentoDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaGastosDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -25,6 +28,13 @@ public interface PessoaController {
 
     @GetMapping
     ResponseEntity<List<PessoaDTO>> listarPessoa();
+
+    @GetMapping("/gastos")
+    ResponseEntity<List<PessoaGastosDTO>> buscarPessoasPorNomeEPeriodo(
+            @RequestParam String nome,
+            @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") Date dataInicio,
+            @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") Date dataFim
+    );
 
 
 }
