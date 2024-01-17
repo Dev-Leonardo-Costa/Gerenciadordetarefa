@@ -31,15 +31,9 @@ public class PessoaControllerImpl implements PessoaController {
         return ResponseEntity.status(CREATED.value()).build();
     }
 
-    //Regra é essa => Listar pessoas trazendo nome, departamento, total horas gastas nas tarefas.
-    @Override
-    public ResponseEntity<Pessoa> buscar(final Long pessoaId) {
-        return ResponseEntity.ok(service.buscarPorId(pessoaId));
-    }
-
     @Override
     public ResponseEntity<Pessoa> alterar(final Long pessoaId, final Pessoa pessoa) {
-        service.alterar(pessoaId,pessoa);
+        service.alterar(pessoaId, pessoa);
         return ResponseEntity.status(NO_CONTENT).build();
     }
 

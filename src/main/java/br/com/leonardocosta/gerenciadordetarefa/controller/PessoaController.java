@@ -27,16 +27,6 @@ public interface PessoaController {
     ResponseEntity<Void> registrar(@RequestBody final Pessoa pessoa);
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Pessoa encontrada"),
-            @ApiResponse(responseCode = "404", description = "Pessoa não encontrada"),
-            @ApiResponse(responseCode = "500", description = "Erro interno"),
-            @ApiResponse(responseCode = "400", description = "Requisição inválida")
-    })
-    @Operation(summary = "Busca uma pessoa pelo seu ID")
-    @GetMapping("/{pessoaId}")
-    ResponseEntity<Pessoa> buscar(@PathVariable final Long pessoaId);
-
-    @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Pessoa alterada"),
             @ApiResponse(responseCode = "404", description = "Pessoa não encontrada"),
             @ApiResponse(responseCode = "500", description = "Erro interno"),

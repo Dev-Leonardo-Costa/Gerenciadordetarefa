@@ -34,16 +34,6 @@ public interface TarefaController {
     ResponseEntity<Tarefa> alocar(@PathVariable final Long tarefaId, @RequestParam final Long pessoaId);
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Tarefa encontrada"),
-            @ApiResponse(responseCode = "404", description = "Tarefa não encontrada"),
-            @ApiResponse(responseCode = "500", description = "Erro interno"),
-            @ApiResponse(responseCode = "400", description = "Requisição inválida")
-    })
-    @Operation(summary = "Busca uma tarefa pelo seu ID")
-    @GetMapping("/{id}")
-    ResponseEntity<Tarefa> buscar(@PathVariable Long id);
-
-    @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Tarefa finalizada"),
             @ApiResponse(responseCode = "404", description = "Tarefa não encontrada"),
             @ApiResponse(responseCode = "500", description = "Erro interno"),
