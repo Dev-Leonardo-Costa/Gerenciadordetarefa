@@ -1,6 +1,7 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.service;
 
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.DepartamentoDTO;
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaCreateDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaGastosDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
@@ -20,8 +21,10 @@ public class PessoaService {
 
     private final PessoaRepository repository;
 
-    public Pessoa salvar(final Pessoa pessoa) {
-        return repository.save(pessoa);
+    public PessoaCreateDTO salvar(final PessoaCreateDTO pessoaDTO) {
+        Pessoa pessoaSalva = repository.save(pessoaDTO.toModel());
+        PessoaCreateDTO pessoaSalvaDTO = new PessoaCreateDTO().fromModel(pessoaSalva);
+        return pessoaSalvaDTO;
     }
 
     public Pessoa buscarPorId(final Long pessoaId) {
@@ -72,19 +75,17 @@ public class PessoaService {
     }
 
     private List<PessoaDTO> getPessoaDTOS(List<Pessoa> pessoas) {
-        List<PessoaDTO> pessoasDTO = new ArrayList<>();
-
-        for (Pessoa pessoa : pessoas) {
-            PessoaDTO pessoaDTO = new PessoaDTO();
-            pessoaDTO.setNome(pessoa.getNome());
-            pessoaDTO.setDepartamento(pessoa.getDepartamento());
-            pessoaDTO.setTotalHorasGasta(calcularTotalHorasTarefas(pessoa.getId()));
-
-            pessoasDTO.add(pessoaDTO);
-        }
-
-        return pessoasDTO;
+        return pessoas.stream()
+                .map(pessoa -> {
+                    PessoaDTO pessoaDTO = new PessoaDTO();
+                    pessoaDTO.setNome(pessoa.getNome());
+                    pessoaDTO.setDepartamento(pessoa.getDepartamento());
+                    pessoaDTO.setTotalHorasGasta(calcularTotalHorasTarefas(pessoa.getId()));
+                    return pessoaDTO;
+                })
+                .collect(Collectors.toList());
     }
+
 
     private int calcularTotalHorasTarefas(Long pessoaId) {
         Pessoa pessoa = buscarPorId(pessoaId);

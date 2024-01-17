@@ -1,6 +1,8 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.service;
 
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaCreateDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaGastosDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.exception.NotFoundException;
 import br.com.leonardocosta.gerenciadordetarefa.domain.repository.PessoaRepository;
@@ -10,11 +12,12 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -29,10 +32,10 @@ class PessoaServiceTest {
 
     @Test
     void salvarPessoaDeveRetornarPessoaSalva() {
-        Pessoa pessoaParaSalvar = new Pessoa();
-        when(repository.save(any(Pessoa.class))).thenReturn(pessoaParaSalvar);
+        PessoaCreateDTO pessoaParaSalvar = new PessoaCreateDTO();
+        when(repository.save(any(Pessoa.class))).thenReturn(new Pessoa());
 
-        Pessoa pessoaSalva = service.salvar(pessoaParaSalvar);
+        Pessoa pessoaSalva = service.salvar(pessoaParaSalvar).toModel();
 
         assertNotNull(pessoaSalva);
         verify(repository, times(1)).save(any(Pessoa.class));
@@ -101,4 +104,28 @@ class PessoaServiceTest {
         verify(repository, times(1)).findAll();
     }
 
+    @Test
+    void buscarPessoasPorNomeEPeriodoDeveRetornarListaDeDTOs() {
+        when(repository.buscarPessoasPorNomeEPeriodo(anyString(), any(Date.class), any(Date.class))).thenReturn(getResultadosMock());
+
+        // Execução do método a ser testado
+        List<PessoaGastosDTO> dtos = service.buscarPessoasPorNomeEPeriodo("Nome", new Date(), new Date());
+
+        assertNotNull(dtos);
+        assertFalse(dtos.isEmpty());
+        assertEquals(2, dtos.size());
+
+        assertEquals("Nome1", dtos.get(0).getNome());
+        assertEquals(10.0, dtos.get(0).getMediaHorasGastas());
+
+        assertEquals("Nome2", dtos.get(1).getNome());
+        assertEquals(15.0, dtos.get(1).getMediaHorasGastas());
+    }
+
+    private List<Object[]> getResultadosMock() {
+        List<Object[]> resultados = new ArrayList<>();
+        resultados.add(new Object[]{"Nome1", 10.0});
+        resultados.add(new Object[]{"Nome2", 15.0});
+        return resultados;
+    }
 }

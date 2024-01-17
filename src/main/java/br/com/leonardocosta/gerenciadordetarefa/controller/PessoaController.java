@@ -1,9 +1,14 @@
 package br.com.leonardocosta.gerenciadordetarefa.controller;
 
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaCreateDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaGastosDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
+import br.com.leonardocosta.gerenciadordetarefa.domain.exception.StandarError;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,24 +18,49 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+
+import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
+
 @Tag(name = "Pessoa", description = "Controlador resposavel por gerenciar pessoa")
 @RequestMapping("/pessoa")
 public interface PessoaController {
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Pessoa criada"),
-            @ApiResponse(responseCode = "400", description = "Requisição inválida"),
-            @ApiResponse(responseCode = "500", description = "Erro interno")
+            @ApiResponse(responseCode = "400", description = "Requisição inválida",
+                    content = @Content(
+                    mediaType = APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = StandarError.class)
+            )),
+            @ApiResponse(responseCode = "500", description = "Erro interno",
+                    content = @Content(
+                            mediaType = APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = StandarError.class)
+                    ))
     })
     @Operation(summary = "Registra uma nova pessoa")
     @PostMapping
-    ResponseEntity<Void> registrar(@RequestBody final Pessoa pessoa);
+    ResponseEntity<Void> registrar(
+            @Parameter(description = "Pessoa", required = true, example = "Leonardo Costa")
+            @RequestBody final PessoaCreateDTO pessoa
+    );
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Pessoa alterada"),
-            @ApiResponse(responseCode = "404", description = "Pessoa não encontrada"),
-            @ApiResponse(responseCode = "500", description = "Erro interno"),
-            @ApiResponse(responseCode = "400", description = "Requisição inválida")
+            @ApiResponse(responseCode = "404", description = "Pessoa não encontrada",
+                    content = @Content(
+                            mediaType = APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = StandarError.class)
+                    )),
+            @ApiResponse(responseCode = "500", description = "Erro interno",
+                    content = @Content(
+                    mediaType = APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = StandarError.class)
+            )),
+            @ApiResponse(responseCode = "400", description = "Requisição inválida",    content = @Content(
+                    mediaType = APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = StandarError.class)
+            )),
     })
     @Operation(summary = "Altera os dados de uma pessoa")
     @PutMapping("/{pessoaId}")
@@ -38,8 +68,15 @@ public interface PessoaController {
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Pessoa removida"),
-            @ApiResponse(responseCode = "404", description = "Pessoa não encontrada"),
-            @ApiResponse(responseCode = "500", description = "Erro interno"),
+            @ApiResponse(responseCode = "404", description = "Pessoa não encontrada",
+                    content = @Content(
+                            mediaType = APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = StandarError.class)
+                    )),
+            @ApiResponse(responseCode = "500", description = "Erro interno",    content = @Content(
+                    mediaType = APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = StandarError.class)
+            )),
             @ApiResponse(responseCode = "400", description = "Requisição inválida")
     })
     @Operation(summary = "Remove uma pessoa")
@@ -48,8 +85,14 @@ public interface PessoaController {
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Pessoas encontradas"),
-            @ApiResponse(responseCode = "500", description = "Erro interno"),
-            @ApiResponse(responseCode = "400", description = "Requisição inválida")
+            @ApiResponse(responseCode = "500", description = "Erro interno",    content = @Content(
+                    mediaType = APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = StandarError.class)
+            )),
+            @ApiResponse(responseCode = "400", description = "Requisição inválida",    content = @Content(
+                    mediaType = APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = StandarError.class)
+            )),
     })
     @Operation(summary = "Busca todas as pessoas")
     @GetMapping
@@ -57,8 +100,14 @@ public interface PessoaController {
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Pessoas encontradas"),
-            @ApiResponse(responseCode = "500", description = "Erro interno"),
-            @ApiResponse(responseCode = "400", description = "Requisição inválida")
+            @ApiResponse(responseCode = "500", description = "Erro interno",    content = @Content(
+                    mediaType = APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = StandarError.class)
+            )),
+            @ApiResponse(responseCode = "400", description = "Requisição inválida",    content = @Content(
+                    mediaType = APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = StandarError.class)
+            )),
     })
     @Operation(summary = "Busca todas as pessoas por nome e pelo periodo")
     @GetMapping("/gastos")

@@ -2,6 +2,7 @@ package br.com.leonardocosta.gerenciadordetarefa.controller.impl;
 
 import br.com.leonardocosta.gerenciadordetarefa.controller.PessoaController;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.DepartamentoDTO;
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaCreateDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaGastosDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
@@ -26,7 +27,7 @@ public class PessoaControllerImpl implements PessoaController {
     private final PessoaService service;
 
     @Override
-    public ResponseEntity<Void> registrar(final Pessoa pessoa) {
+    public ResponseEntity<Void> registrar(final PessoaCreateDTO pessoa) {
         service.salvar(pessoa);
         return ResponseEntity.status(CREATED.value()).build();
     }
