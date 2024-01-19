@@ -40,7 +40,7 @@ public class Tarefa implements Serializable {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "pessoa_id")
+    @JoinColumn(name = "id_pessoa")
     private Pessoa pessoa;
 
     public Tarefa(String titulo, String descricao, Date prazo, String departamento, int duracao) {

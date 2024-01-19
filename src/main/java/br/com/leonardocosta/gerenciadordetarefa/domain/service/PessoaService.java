@@ -1,9 +1,7 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.service;
 
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.DepartamentoDTO;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaCreateDTO;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaGastosDTO;
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.*;
+import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Departamento;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.exception.NotFoundException;
 import br.com.leonardocosta.gerenciadordetarefa.domain.repository.PessoaRepository;
@@ -21,10 +19,12 @@ public class PessoaService {
 
     private final PessoaRepository repository;
 
+    private final DepartamentoService departamentoService;
+
     public PessoaCreateDTO salvar(final PessoaCreateDTO pessoaDTO) {
-        Pessoa pessoaSalva = repository.save(pessoaDTO.toModel());
-        PessoaCreateDTO pessoaSalvaDTO = new PessoaCreateDTO().fromModel(pessoaSalva);
-        return pessoaSalvaDTO;
+        final Pessoa entity = PessoaCreateDTO.toModel(pessoaDTO);
+        repository.save(entity);
+        return PessoaCreateDTO.fromModel(entity);
     }
 
     public Pessoa buscarPorId(final Long pessoaId) {
@@ -36,9 +36,11 @@ public class PessoaService {
         repository.deleteById(pessoaId);
     }
 
-    public Pessoa alterar(final Long pessoaId, final Pessoa pessoa) {
-        Pessoa pessoaExistente = buscarPorId(pessoaId);
-        pessoaExistente.setNome(pessoa.getNome());
+    public Pessoa alterar(final Long pessoaId, final PessoaCreateDTO pessoaCreateDTO) {
+        final Pessoa pessoaExistente = buscarPorId(pessoaId);
+        pessoaExistente.setNome(pessoaCreateDTO.getNome());
+        Departamento departamento = departamentoService.buscarPorId(pessoaCreateDTO.getDepartamento());
+        pessoaExistente.setDepartamento(departamento);
         return repository.save(pessoaExistente);
     }
 
@@ -79,7 +81,7 @@ public class PessoaService {
                 .map(pessoa -> {
                     PessoaDTO pessoaDTO = new PessoaDTO();
                     pessoaDTO.setNome(pessoa.getNome());
-                    pessoaDTO.setDepartamento(pessoa.getDepartamento());
+                    pessoaDTO.setDepartamento(pessoa.getDepartamento().getNome());
                     pessoaDTO.setTotalHorasGasta(calcularTotalHorasTarefas(pessoa.getId()));
                     return pessoaDTO;
                 })

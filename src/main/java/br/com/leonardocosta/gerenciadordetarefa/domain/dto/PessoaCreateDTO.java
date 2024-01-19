@@ -1,24 +1,34 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.dto;
 
+import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Departamento;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class PessoaCreateDTO {
 
     private String nome;
-    private String departamento;
+    private Long departamento;
 
-    public Pessoa toModel() {
-        Pessoa pessoa = new Pessoa();
-        pessoa.setNome(nome);
-        pessoa.setDepartamento(departamento);
-        return pessoa;
+    public static Pessoa toModel(PessoaCreateDTO createDTO) {
+       Pessoa pessoa = new Pessoa();
+       Departamento departamento = new Departamento();
+       departamento.setId(createDTO.getDepartamento());
+       pessoa.setNome(createDTO.getNome());
+       pessoa.setDepartamento(departamento);
+       return pessoa;
+    }
+    public static PessoaCreateDTO fromModel(Pessoa pessoa) {
+       PessoaCreateDTO dto = new PessoaCreateDTO();
+       dto.setNome(pessoa.getNome());
+       dto.setDepartamento(pessoa.getDepartamento().getId());
+       return dto;
     }
 
-    public PessoaCreateDTO fromModel(Pessoa pessoaSalva) {
-        nome = pessoaSalva.getNome();
-        departamento = pessoaSalva.getDepartamento();
-        return this;
-    }
+
 }

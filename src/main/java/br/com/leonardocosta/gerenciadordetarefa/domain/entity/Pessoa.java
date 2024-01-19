@@ -1,5 +1,6 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.entity;
 
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaCreateDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+@With
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -23,7 +25,9 @@ public class Pessoa implements Serializable {
 
     private String nome;
 
-    private String departamento;
+    @ManyToOne
+    @JoinColumn(name = "id_departamento")
+    private Departamento departamento;
 
     @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
     private List<Tarefa> tarefas = new ArrayList<>();
@@ -32,5 +36,9 @@ public class Pessoa implements Serializable {
         return tarefas.stream()
                 .mapToInt(Tarefa::getDuracao)
                 .sum();
+    }
+
+    public PessoaCreateDTO toCreateDTO() {
+        return new PessoaCreateDTO().fromModel(this);
     }
 }

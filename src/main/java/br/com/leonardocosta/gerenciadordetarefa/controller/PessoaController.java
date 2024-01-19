@@ -3,7 +3,6 @@ package br.com.leonardocosta.gerenciadordetarefa.controller;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaCreateDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaGastosDTO;
-import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.exception.StandarError;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -21,8 +20,8 @@ import java.util.List;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
-@Tag(name = "Pessoa", description = "Controlador resposavel por gerenciar pessoa")
-@RequestMapping("/pessoa")
+@Tag(name = "Pessoas", description = "Controlador resposavel por gerenciar pessoa")
+@RequestMapping("/pessoas")
 public interface PessoaController {
 
     @ApiResponses(value = {
@@ -40,7 +39,7 @@ public interface PessoaController {
     })
     @Operation(summary = "Registra uma nova pessoa")
     @PostMapping
-    ResponseEntity<Void> registrar(
+    ResponseEntity<PessoaCreateDTO> registrar(
             @Parameter(description = "Pessoa", required = true, example = "Leonardo Costa")
             @RequestBody final PessoaCreateDTO pessoa
     );
@@ -64,7 +63,7 @@ public interface PessoaController {
     })
     @Operation(summary = "Altera os dados de uma pessoa")
     @PutMapping("/{pessoaId}")
-    ResponseEntity<Pessoa> alterar(@PathVariable final Long pessoaId, @RequestBody final Pessoa pessoa);
+    ResponseEntity<PessoaCreateDTO> alterar(@PathVariable final Long pessoaId, @RequestBody final PessoaCreateDTO pessoaUpdateDTO);
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Pessoa removida"),

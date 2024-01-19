@@ -1,7 +1,6 @@
 package br.com.leonardocosta.gerenciadordetarefa.controller.impl;
 
 import br.com.leonardocosta.gerenciadordetarefa.controller.PessoaController;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.DepartamentoDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaCreateDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaGastosDTO;
@@ -16,7 +15,6 @@ import java.util.Date;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 
 @RequiredArgsConstructor
@@ -27,15 +25,16 @@ public class PessoaControllerImpl implements PessoaController {
     private final PessoaService service;
 
     @Override
-    public ResponseEntity<Void> registrar(final PessoaCreateDTO pessoa) {
-        service.salvar(pessoa);
-        return ResponseEntity.status(CREATED.value()).build();
+    public ResponseEntity<PessoaCreateDTO> registrar(final PessoaCreateDTO pessoa) {
+        final PessoaCreateDTO pessoaSalvo = service.salvar(pessoa);
+        return ResponseEntity.status(CREATED).body(pessoaSalvo);
     }
 
     @Override
-    public ResponseEntity<Pessoa> alterar(final Long pessoaId, final Pessoa pessoa) {
-        service.alterar(pessoaId, pessoa);
-        return ResponseEntity.status(NO_CONTENT).build();
+    public ResponseEntity<PessoaCreateDTO> alterar(final Long pessoaId, final PessoaCreateDTO pessoaCreateDTO) {
+        final Pessoa alterar = service.alterar(pessoaId, pessoaCreateDTO);
+        final PessoaCreateDTO createDTO = PessoaCreateDTO.fromModel(alterar);
+        return ResponseEntity.ok(createDTO);
     }
 
     @Override
