@@ -11,15 +11,6 @@ import java.util.List;
 @Repository
 public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
 
-    /**
-     * Metodo para buscar uma lista de limites de tarefas
-     *
-     * @param limit
-     * @return uma lista de tarefas de acordo com o limite passado no paramentro
-     */
-    @Query("SELECT t FROM Tarefa t WHERE t.pessoa IS NULL ORDER BY t.prazo ASC LIMIT :limit")
-    List<Tarefa> listarTarefasPendentesMaisAntigas(@Param("limit") int limit);
-
     @Query("SELECT t FROM Tarefa t WHERE t.pessoa IS NULL ORDER BY t.prazo ASC LIMIT 3")
     List<Tarefa> listarTarefasPendentes();
 

@@ -1,7 +1,6 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.entity;
 
 
-import br.com.leonardocosta.gerenciadordetarefa.request.TarefaCreateRecord;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -32,36 +31,18 @@ public class Tarefa implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date prazo;
 
-    private String departamento;
-
     private int duracao;
 
-    private Boolean finalizado;
+    private Boolean finalizado = false;
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_pessoa")
     private Pessoa pessoa;
 
-    public Tarefa(String titulo, String descricao, Date prazo, String departamento, int duracao) {
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.prazo = prazo;
-        this.departamento = departamento;
-        this.duracao = duracao;
-        this.finalizado = false;
-    }
-
-    public static Tarefa fromTo(TarefaCreateRecord tarefa) {
-        var entidade = new Tarefa(
-                tarefa.titulo(),
-                tarefa.descricao(),
-                tarefa.prazo(),
-                tarefa.departamento(),
-                tarefa.duracao()
-        );
-        return entidade;
-    }
+    @ManyToOne
+    @JoinColumn(name = "id_departamento")
+    private Departamento departamento;
 
     public Boolean isFinalizado() {
         return finalizado;

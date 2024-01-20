@@ -3,7 +3,7 @@ package br.com.leonardocosta.gerenciadordetarefa.controller.impl;
 import br.com.leonardocosta.gerenciadordetarefa.controller.TarefaController;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Tarefa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.service.TarefaService;
-import br.com.leonardocosta.gerenciadordetarefa.request.TarefaCreateRecord;
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.TarefaCreateDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +21,9 @@ public class TarefaControllerImpl implements TarefaController {
     private final TarefaService service;
 
     @Override
-    public ResponseEntity<Void> adiconarTarefa(TarefaCreateRecord tarefa) {
-        service.salvar(tarefa);
-        return ResponseEntity.status(CREATED.value()).build();
+    public ResponseEntity<TarefaCreateDTO> registrarTarefa(final TarefaCreateDTO tarefa) {
+        final TarefaCreateDTO tarefaSalva = service.salvar(tarefa);
+        return ResponseEntity.status(CREATED).body(tarefaSalva);
     }
 
     @Override
@@ -38,15 +38,10 @@ public class TarefaControllerImpl implements TarefaController {
         return ResponseEntity.ok().build();
     }
 
-    @Override
-    public ResponseEntity<List<Tarefa>> listarTarefasPendentesMaisAntigas(int limit) {
-        List<Tarefa> tarefas = service.listarTarefasPendentesMaisAntigas(limit);
-        return ResponseEntity.ok(tarefas);
-    }
 
     @Override
     public ResponseEntity<List<Tarefa>> listarTarefasPendentesMaisAntigas() {
-        List<Tarefa> tarefas = service.listarTarefasPendentesMaisAntigasDeAcordoComOEnpointQUeFoiPedido();
+        List<Tarefa> tarefas = service.listarTarefasPendentesMaisAntigas();
         return ResponseEntity.ok(tarefas);
     }
 

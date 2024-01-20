@@ -20,17 +20,13 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
             "GROUP BY p.departamento", nativeQuery = true)
     List<Object[]> listarDepartamentosComQuantidadeDePessoasETarefas();
 
-    @Query("SELECT p.nome AS nome, AVG(t.duracao) AS mediaHorasGastas " +
-            "FROM Pessoa p " +
-            "JOIN p.tarefas t " +
-            "WHERE LOWER(p.nome) LIKE LOWER(CONCAT('%', :nome, '%')) " +
-            "AND t.prazo BETWEEN :dataInicio " +
-            "AND :dataFim " +
-            "GROUP BY p.nome")
-    List<Object[]> buscarPessoasPorNomeEPeriodo(
-            @Param("nome") String nome,
-            @Param("dataInicio") Date dataInicio,
-            @Param("dataFim") Date dataFim
-    );
+    @Query(value = "SELECT p.id, p.nome, d.nome AS departamento, COALESCE(SUM(t.duracao), 0) AS total_horas " +
+            "FROM pessoa p " +
+            "LEFT JOIN tarefa t ON p.id = t.id_pessoa " +
+            "LEFT JOIN departamento d ON p.id_departamento = d.id " +
+            "GROUP BY p.id, p.nome, d.nome " +
+            "ORDER BY p.id",
+            nativeQuery = true)
+    List<Pessoa> listarPessoas();
 
 }

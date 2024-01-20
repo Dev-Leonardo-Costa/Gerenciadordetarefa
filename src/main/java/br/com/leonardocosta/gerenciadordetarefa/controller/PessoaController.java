@@ -3,6 +3,7 @@ package br.com.leonardocosta.gerenciadordetarefa.controller;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaCreateDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaGastosDTO;
+import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.exception.StandarError;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -97,24 +98,22 @@ public interface PessoaController {
     @GetMapping
     ResponseEntity<List<PessoaDTO>> listarPessoa();
 
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Pessoas encontradas"),
-            @ApiResponse(responseCode = "500", description = "Erro interno",    content = @Content(
-                    mediaType = APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = StandarError.class)
-            )),
-            @ApiResponse(responseCode = "400", description = "Requisição inválida",    content = @Content(
-                    mediaType = APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = StandarError.class)
-            )),
-    })
-    @Operation(summary = "Busca todas as pessoas por nome e pelo periodo")
-    @GetMapping("/gastos")
-    ResponseEntity<List<PessoaGastosDTO>> buscarPessoasPorNomeEPeriodo(
-            @RequestParam String nome,
-            @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") Date dataInicio,
-            @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") Date dataFim
-    );
+    @GetMapping("/pessoas")
+    List<Pessoa> listarPessoas();
+
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "200", description = "Pessoas encontradas"),
+//            @ApiResponse(responseCode = "500", description = "Erro interno",    content = @Content(
+//                    mediaType = APPLICATION_JSON_VALUE,
+//                    schema = @Schema(implementation = StandarError.class)
+//            )),
+//            @ApiResponse(responseCode = "400", description = "Requisição inválida",    content = @Content(
+//                    mediaType = APPLICATION_JSON_VALUE,
+//                    schema = @Schema(implementation = StandarError.class)
+//            )),
+//    })
+//    @Operation(summary = "Busca todas as pessoas por nome e pelo periodo")
+//    @GetMapping("/gastos")
 
 
 }

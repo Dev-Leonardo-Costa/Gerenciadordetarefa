@@ -14,7 +14,11 @@ public class DepartamentoService {
     private final DepartamentoRepository repository;
     public Departamento buscarPorId(final Long idDepartamento) {
         return repository.findById(idDepartamento)
-                .orElseThrow(() -> new NotFoundException("Departamento não encontrado" + idDepartamento));
+                .orElseThrow(() -> new NotFoundException(String.format("Departamento de código: %d não encontrado", idDepartamento)));
+    }
+    public Departamento buscarPorIdDepartamentoParaPessoa(final Long idDepartamento) {
+        return repository.findById(idDepartamento)
+                .orElseThrow(() -> new NotFoundException(String.format("Departamento não encontrado de código: %d para cadastrar pessoa", idDepartamento)));
     }
 
 }

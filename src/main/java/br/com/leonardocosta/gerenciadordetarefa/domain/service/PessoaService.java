@@ -23,13 +23,14 @@ public class PessoaService {
 
     public PessoaCreateDTO salvar(final PessoaCreateDTO pessoaDTO) {
         final Pessoa entity = PessoaCreateDTO.toModel(pessoaDTO);
+        departamentoService.buscarPorIdDepartamentoParaPessoa(entity.getDepartamento().getId());
         repository.save(entity);
         return PessoaCreateDTO.fromModel(entity);
     }
 
     public Pessoa buscarPorId(final Long pessoaId) {
         return repository.findById(pessoaId)
-                .orElseThrow(() -> new NotFoundException("Pessoa não encontrada de código: " + pessoaId));
+                .orElseThrow(() -> new NotFoundException(String.format("Pessoa de código: %d não encontrada",pessoaId)));
     }
 
     public void removerPessoa(final Long pessoaId) {
@@ -61,21 +62,6 @@ public class PessoaService {
                 .collect(Collectors.toList());
     }
 
-    public List<PessoaGastosDTO> buscarPessoasPorNomeEPeriodo(String nome, Date dataInicio, Date dataFim) {
-        List<Object[]> resultados = repository.buscarPessoasPorNomeEPeriodo(nome, dataInicio, dataFim);
-        List<PessoaGastosDTO> dtos = new ArrayList<>();
-
-        for (Object[] resultado : resultados) {
-            String nomePessoa = (String) resultado[0];
-            Double mediaHorasGastas = (Double) resultado[1];
-
-            PessoaGastosDTO dto = new PessoaGastosDTO(nomePessoa, mediaHorasGastas);
-            dtos.add(dto);
-        }
-
-        return dtos;
-    }
-
     private List<PessoaDTO> getPessoaDTOS(List<Pessoa> pessoas) {
         return pessoas.stream()
                 .map(pessoa -> {
@@ -86,6 +72,10 @@ public class PessoaService {
                     return pessoaDTO;
                 })
                 .collect(Collectors.toList());
+    }
+
+    public List<Pessoa> listarPessoas() {
+        return repository.listarPessoas();
     }
 
 

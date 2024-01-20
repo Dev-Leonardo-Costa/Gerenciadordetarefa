@@ -2,7 +2,7 @@ package br.com.leonardocosta.gerenciadordetarefa.controller;
 
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Tarefa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.exception.StandarError;
-import br.com.leonardocosta.gerenciadordetarefa.request.TarefaCreateRecord;
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.TarefaCreateDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -34,7 +34,7 @@ public interface TarefaController {
     })
     @Operation(summary = "Adiciona uma tarefa")
     @PostMapping
-    ResponseEntity<Void> adiconarTarefa(@RequestBody TarefaCreateRecord tarefa);
+    ResponseEntity<TarefaCreateDTO> registrarTarefa(@RequestBody TarefaCreateDTO tarefa);
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Tarefa alocada"),
@@ -78,23 +78,6 @@ public interface TarefaController {
     ResponseEntity<Tarefa> finalizarTarefa(
             @Parameter(description = "Tarefa", required = true, example = "1") @PathVariable Long tarefaId
     );
-
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Tarefas encontradas"),
-            @ApiResponse(responseCode = "400", description = "Requisição inválida",
-                    content = @Content(
-                            mediaType = APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = StandarError.class)
-                    )),
-            @ApiResponse(responseCode = "500", description = "Erro interno",
-                    content = @Content(
-                            mediaType = APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = StandarError.class)
-                    ))
-    })
-    @Operation(summary = "Busca as tarefas pendentes por limite que desejar e com os prazos mais antigos")
-    @GetMapping("/pendentes-meu")
-    ResponseEntity<List<Tarefa>> listarTarefasPendentesMaisAntigas(@RequestParam(defaultValue = "3") int limit);
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Tarefas encontradas"),
