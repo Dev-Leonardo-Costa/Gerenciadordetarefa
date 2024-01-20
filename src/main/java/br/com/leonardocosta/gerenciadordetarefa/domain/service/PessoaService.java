@@ -50,18 +50,6 @@ public class PessoaService {
         return getPessoaDTOS(pessoas);
     }
 
-    public List<DepartamentoDTO> listarDepartamentosComQuantidadeDePessoasETarefas() {
-        List<Object[]> resultados = repository.listarDepartamentosComQuantidadeDePessoasETarefas();
-
-        return resultados.stream()
-                .map(result -> new DepartamentoDTO(
-                        (String) result[0],
-                        ((Number) result[1]).longValue(),
-                        ((Number) result[2]).longValue()
-                ))
-                .collect(Collectors.toList());
-    }
-
     private List<PessoaDTO> getPessoaDTOS(List<Pessoa> pessoas) {
         return pessoas.stream()
                 .map(pessoa -> {

@@ -27,8 +27,10 @@ public class Departamento implements Serializable {
 
     private String nome;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "departamento", cascade = CascadeType.ALL)
     private List<Pessoa> pessoas = new ArrayList<>();
+
+    @OneToMany(mappedBy = "departamento", cascade = CascadeType.ALL)
+    private List<Tarefa> tarefas = new ArrayList<>();
 
 }

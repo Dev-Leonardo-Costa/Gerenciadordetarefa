@@ -1,6 +1,7 @@
 package br.com.leonardocosta.gerenciadordetarefa.controller;
 
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.DepartamentoDTO;
+import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Departamento;
 import br.com.leonardocosta.gerenciadordetarefa.domain.exception.StandarError;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
