@@ -8,7 +8,7 @@ Configuração do Banco de Dados
 Como Usar
 API Endpoints
 Instalação
-Certifique-se de ter o Java e PostgreSQL instalados em seu sistema.
+Certifique-se de ter o Java e PostgreSQL instalados.
 
 <br> Clone o repositório e execute o seguinte comando para instalar as dependências:
 
