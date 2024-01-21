@@ -49,7 +49,7 @@ public class PessoaService {
         return getPessoaDTOS(pessoas);
     }
 
-    public List<PessoaGastosDTO> buscarPessoasPorNomeEPeriodo(String nome, Date dataInicio, Date dataFim) {
+    public List<PessoaPorNomeEPeriodoProjection> buscarPessoasPorNomeEPeriodo(String nome, Date dataInicio, Date dataFim) {
         return repository.buscarPessoasPorNomeEPeriodo(nome, dataInicio, dataFim);
     }
 

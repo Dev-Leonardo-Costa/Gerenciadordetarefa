@@ -3,7 +3,7 @@ package br.com.leonardocosta.gerenciadordetarefa.controller.impl;
 import br.com.leonardocosta.gerenciadordetarefa.controller.PessoaController;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaCreateDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaGastosDTO;
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaPorNomeEPeriodoProjection;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.service.PessoaService;
 import lombok.RequiredArgsConstructor;
@@ -56,9 +56,9 @@ public class PessoaControllerImpl implements PessoaController {
     }
 
     @Override
-    public ResponseEntity<List<PessoaGastosDTO>> calcularMediaHorasPorTarefa(String nome, Date dataInicio, Date dataFim) {
-        List<PessoaGastosDTO> pessoasGastos = service.buscarPessoasPorNomeEPeriodo(nome, dataInicio, dataFim);
-        return ResponseEntity.ok(pessoasGastos);
+    public ResponseEntity<List<PessoaPorNomeEPeriodoProjection>> calcularMediaHorasPorTarefa(String nome, Date dataInicio, Date dataFim) {
+        List<PessoaPorNomeEPeriodoProjection> resultado = service.buscarPessoasPorNomeEPeriodo(nome, dataInicio, dataFim);
+        return ResponseEntity.ok(resultado);
     }
 
 }

@@ -2,7 +2,7 @@ package br.com.leonardocosta.gerenciadordetarefa.controller;
 
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaCreateDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaGastosDTO;
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaPorNomeEPeriodoProjection;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.exception.StandarError;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,7 +16,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -115,10 +114,10 @@ public interface PessoaController {
     })
     @Operation(summary = "Busca todas as pessoas por nome e pelo periodo")
     @GetMapping("/gastos")
-    public ResponseEntity<List<PessoaGastosDTO>> calcularMediaHorasPorTarefa(
-            @RequestParam String nome,
-            @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") Date dataInicio,
-            @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") Date dataFim
+    ResponseEntity<List<PessoaPorNomeEPeriodoProjection>> calcularMediaHorasPorTarefa(
+            @RequestParam("nome") String nome,
+            @RequestParam("dataInicio") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataInicio,
+            @RequestParam("dataFim") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataFim
     );
 
 }

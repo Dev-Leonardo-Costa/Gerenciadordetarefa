@@ -14,10 +14,12 @@ import java.util.Date;
 public class TarefaListarTarefaAntigaDTO {
 
     private String titulo;
-    private Date prazo;
-    private Departamento departamento;
-    private Boolean finalizado;
 
+    private Date prazo;
+
+    private Departamento departamento;
+
+    private Boolean finalizado;
 
 
 }
