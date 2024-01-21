@@ -1,70 +1,53 @@
-# Gerenciador de tarefas
 
-O Gerenciador de Tarefas é uma aplicação dedicada a 
-simplificar o processo de organização e acompanhamento de tarefas em um ambiente de equipe. 
-Desenvolvido para oferecer uma experiência eficiente e intuitiva, 
-o sistema permite a adição, atribuição e conclusão de tarefas de forma centralizada.
+Gerenciador de Tarefas - Java Spring
+Este é um gerenciador de tarefas simples desenvolvido usando Java Spring e PostgreSQL como banco de dados.
 
-## Endpoints
+Índice
+Instalação
+Configuração do Banco de Dados
+Como Usar
+API Endpoints
+Contribuindo
+Licença
+Instalação
+Certifique-se de ter o Java e o Maven instalados em seu sistema. Clone o repositório e execute o seguinte comando para instalar as dependências:
 
-A seguir estão os principais endpoints da API:
+bash
+Copy code
+# Clone o repositório
+git clone https://github.com/seu-usuario/gerenciador-de-tarefas.git
 
-### Adicionar uma pessoa
+# Entre no diretório do projeto
+cd gerenciador-de-tarefas
 
-- **Método**: POST
-- **Endpoint**: `/pessoas`
-- **Descrição**: Adiciona uma nova pessoa.
+# Instale as dependências
+mvn install
+Configuração do Banco de Dados
+Este projeto usa o PostgreSQL como banco de dados. Certifique-se de ter um servidor PostgreSQL em execução e atualize as configurações no arquivo application.properties com as informações do seu banco de dados.
 
-### Alterar uma pessoa
+properties
+Copy code
+# src/main/resources/application.properties
 
-- **Método**: PUT
-- **Endpoint**: `/pessoas/{id}`
-- **Descrição**: Altera os dados de uma pessoa específica.
+spring.datasource.url=jdbc:postgresql://localhost:5432/nome-do-banco
+spring.datasource.username=seu-usuario
+spring.datasource.password=sua-senha
+Como Usar
+Execute o aplicativo usando o seguinte comando:
 
-### Remover uma pessoa
+bash
+Copy code
+# Execute o aplicativo
+mvn spring-boot:run
+O aplicativo estará disponível em http://localhost:8080. Você pode acessar a interface do Swagger para testar os endpoints da API em http://localhost:8080/swagger-ui.html.
 
-- **Método**: DELETE
-- **Endpoint**: `/pessoas/{id}`
-- **Descrição**: Remove uma pessoa específica.
+API Endpoints
+Listar Tarefas: GET /tarefas
+Obter Tarefa por ID: GET /tarefas/{id}
+Criar Tarefa: POST /tarefas
+Atualizar Tarefa: PUT /tarefas/{id}
+Excluir Tarefa: DELETE /tarefas/{id}
+Exemplos de uso podem ser encontrados na interface do Swagger.
 
-### Adicionar uma tarefa
-
-- **Método**: POST
-- **Endpoint**: `/tarefas`
-- **Descrição**: Adiciona uma nova tarefa.
-
-### Alocar uma pessoa em uma tarefa do mesmo departamento
-
-- **Método**: PUT
-- **Endpoint**: `/tarefas/alocar/{id}`
-- **Descrição**: Aloca uma pessoa em uma tarefa com base no departamento.
-
-### Finalizar uma tarefa
-
-- **Método**: PUT
-- **Endpoint**: `/tarefas/finalizar/{id}`
-- **Descrição**: Finaliza uma tarefa específica.
-
-### Listar pessoas com nome, departamento e total de horas gastas
-
-- **Método**: GET
-- **Endpoint**: `/pessoas`
-- **Descrição**: Lista pessoas com informações detalhadas.
-
-### Buscar pessoas por nome e período, retorna média de horas gastas por tarefa
-
-- **Método**: GET
-- **Endpoint**: `/pessoas/gastos`
-- **Descrição**: Busca pessoas por nome e período, retornando a média de horas gastas por tarefa.
-
-### Listar 3 tarefas sem pessoa alocada com prazos mais antigos
-
-- **Método**: GET
-- **Endpoint**: `/tarefas/pendentes`
-- **Descrição**: Lista as 3 tarefas sem pessoa alocada, ordenadas pelos prazos mais antigos.
-
-### Listar departamento e quantidade de pessoas e tarefas
-
-- **Método**: GET
-- **Endpoint**: `/departamentos`
-- **Descrição**: Lista os departamentos com a quantidade de pessoas e tarefas associadas.
+Contribuindo
+Sinta-se à vontade para contribuir! Abra um issue para discutir novas funcionalidades ou correções de bugs. Se quiser contribuir com código, siga as instruções no guia de Contribuição.
