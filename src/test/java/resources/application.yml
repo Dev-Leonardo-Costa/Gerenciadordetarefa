@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gerenciamentodetarefa?serverTimezone=UTC
+    username: postgres
+    password: comi1bolo
+    driver-class-name: org.postgresql.Driver
