@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class PessoaCreateDTO {
 
-    private Long id;
     private String nome;
     private Long departamento;
 
@@ -26,7 +25,6 @@ public class PessoaCreateDTO {
     }
     public static PessoaCreateDTO fromModel(Pessoa pessoa) {
        PessoaCreateDTO dto = new PessoaCreateDTO();
-       dto.setId(pessoa.getId());
        dto.setNome(pessoa.getNome());
        dto.setDepartamento(pessoa.getDepartamento().getId());
        return dto;

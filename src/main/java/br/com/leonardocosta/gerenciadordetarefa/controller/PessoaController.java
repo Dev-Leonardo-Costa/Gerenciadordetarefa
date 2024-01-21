@@ -98,9 +98,6 @@ public interface PessoaController {
     @GetMapping
     ResponseEntity<List<PessoaDTO>> listarPessoa();
 
-    @GetMapping("/pessoas")
-    List<Pessoa> listarPessoas();
-
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Pessoas encontradas"),
             @ApiResponse(responseCode = "500", description = "Erro interno", content = @Content(

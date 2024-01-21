@@ -45,34 +45,11 @@ public class PessoaService {
     }
 
     public List<PessoaDTO> listarInformacoesPessoas() {
-        List<Pessoa> pessoas = repository.findAll();
-        return getPessoaDTOS(pessoas);
+        return repository.listarPessoas();
     }
 
     public List<PessoaPorNomeEPeriodoProjection> buscarPessoasPorNomeEPeriodo(String nome, Date dataInicio, Date dataFim) {
         return repository.buscarPessoasPorNomeEPeriodo(nome, dataInicio, dataFim);
-    }
-
-    private List<PessoaDTO> getPessoaDTOS(List<Pessoa> pessoas) {
-        return pessoas.stream()
-                .map(pessoa -> {
-                    PessoaDTO pessoaDTO = new PessoaDTO();
-                    pessoaDTO.setNome(pessoa.getNome());
-                    pessoaDTO.setDepartamento(pessoa.getDepartamento().getNome());
-                    pessoaDTO.setTotalHorasGasta(calcularTotalHorasTarefas(pessoa.getId()));
-                    return pessoaDTO;
-                })
-                .collect(Collectors.toList());
-    }
-
-    public List<Pessoa> listarPessoas() {
-        return repository.listarPessoas();
-    }
-
-
-    private int calcularTotalHorasTarefas(Long pessoaId) {
-        Pessoa pessoa = buscarPorId(pessoaId);
-        return pessoa.horas();
     }
 
 }

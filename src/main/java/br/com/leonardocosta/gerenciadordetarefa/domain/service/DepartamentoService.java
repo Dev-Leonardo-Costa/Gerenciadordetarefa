@@ -29,13 +29,7 @@ public class DepartamentoService {
 
     public List<DepartamentoDTO> listarDepartamento() {
         List<DepartamentoProjection> projections = repository.listarDepartamentosComQuantidadeDePessoasETarefas();
-        return projections.stream()
-                .map(projection -> new DepartamentoDTO(
-                        projection.getDepartamento(),
-                        projection.getQtdPessoas(),
-                        projection.getQtdTarefas()
-                ))
-                .collect(Collectors.toList());
+        return DepartamentoDTO.getDepartamentoDTOS(projections);
     }
 
 }

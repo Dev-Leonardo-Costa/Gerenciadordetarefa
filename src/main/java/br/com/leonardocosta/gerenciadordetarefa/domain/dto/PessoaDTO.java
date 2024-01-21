@@ -2,13 +2,12 @@ package br.com.leonardocosta.gerenciadordetarefa.domain.dto;
 
 import lombok.Data;
 
-@Data
-public class PessoaDTO {
+public interface PessoaDTO {
 
-    private String nome;
+     String getNome();
 
-    private String departamento;
+     String getDepartamento();
 
-    private int totalHorasGasta;
+     int getTotalHorasGasta();
 
 }

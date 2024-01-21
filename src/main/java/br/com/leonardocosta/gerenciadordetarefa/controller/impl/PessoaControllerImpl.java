@@ -51,11 +51,6 @@ public class PessoaControllerImpl implements PessoaController {
     }
 
     @Override
-    public List<Pessoa> listarPessoas() {
-        return service.listarPessoas();
-    }
-
-    @Override
     public ResponseEntity<List<PessoaPorNomeEPeriodoProjection>> calcularMediaHorasPorTarefa(String nome, Date dataInicio, Date dataFim) {
         List<PessoaPorNomeEPeriodoProjection> resultado = service.buscarPessoasPorNomeEPeriodo(nome, dataInicio, dataFim);
         return ResponseEntity.ok(resultado);

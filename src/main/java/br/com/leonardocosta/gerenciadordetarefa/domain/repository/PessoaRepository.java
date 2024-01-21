@@ -1,5 +1,6 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.repository;
 
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaPorNomeEPeriodoProjection;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,13 +17,13 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
     @Query(value = "SELECT " +
             "p.id, p.nome, " +
             "d.nome AS departamento, " +
-            "COALESCE(SUM(t.duracao), 0) AS total_horas " +
+            "COALESCE(SUM(t.duracao), 0) AS totalHorasGasta " +
             "FROM pessoa p " +
             "LEFT JOIN tarefa t ON p.id = t.id_pessoa " +
             "LEFT JOIN departamento d ON p.id_departamento = d.id " +
             "GROUP BY p.id, p.nome, d.nome " +
             "ORDER BY p.id", nativeQuery = true)
-    List<Pessoa> listarPessoas();
+    List<PessoaDTO> listarPessoas();
 
     @Query(value = "SELECT p.nome, AVG(t.duracao) AS mediaHorasPorTarefa " +
             "FROM pessoa p " +

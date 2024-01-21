@@ -35,7 +35,6 @@ public class Tarefa implements Serializable {
 
     private Boolean finalizado = false;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_pessoa")
     private Pessoa pessoa;
