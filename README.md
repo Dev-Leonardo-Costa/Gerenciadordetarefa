@@ -8,7 +8,7 @@ Configuração do Banco de Dados
 Como Usar
 API Endpoints
 Instalação
-Certifique-se de ter o Java e o Maven instalados em seu sistema.
+Certifique-se de ter o Java e PostgreSQL instalados em seu sistema.
 
 <br> Clone o repositório e execute o seguinte comando para instalar as dependências:
 
@@ -17,7 +17,7 @@ Certifique-se de ter o Java e o Maven instalados em seu sistema.
 git clone git@github.com:Dev-Leonardo-Costa/Gerenciadordetarefa.git
 ```
 # Entre no diretório do projeto
-cd gerenciador-de-tarefas
+cd gerenciadordetarefas
 
 # Instale as dependências
 Este projeto usa o PostgreSQL como banco de dados. Certifique-se de ter um servidor PostgreSQL em execução e atualize as configurações no arquivo application.properties com as informações do seu banco de dados.
