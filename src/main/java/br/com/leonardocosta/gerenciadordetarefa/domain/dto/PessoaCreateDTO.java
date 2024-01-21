@@ -2,11 +2,14 @@ package br.com.leonardocosta.gerenciadordetarefa.domain.dto;
 
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Departamento;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
+import ch.qos.logback.classic.spi.LoggingEventVO;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -29,6 +32,5 @@ public class PessoaCreateDTO {
        dto.setDepartamento(pessoa.getDepartamento().getId());
        return dto;
     }
-
 
 }
