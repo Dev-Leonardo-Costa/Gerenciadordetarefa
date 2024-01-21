@@ -1,5 +1,6 @@
 package br.com.leonardocosta.gerenciadordetarefa.controller;
 
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.TarefaListarTarefaAntigaProjection;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Tarefa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.exception.StandarError;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.TarefaCreateDTO;
@@ -94,6 +95,6 @@ public interface TarefaController {
     })
     @Operation(summary = "Busca 3 tarefas que estejam sem pessoa alocada com os prazos mais antigos")
     @GetMapping("/pendentes")
-    ResponseEntity<List<Tarefa>> listarTarefasPendentesMaisAntigas();
+    ResponseEntity<List<TarefaListarTarefaAntigaProjection>> listarTarefasPendentes();
 
 }

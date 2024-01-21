@@ -9,6 +9,6 @@ public class PessoaGastosDTO {
 
     private String nome;
 
-    private Double mediaHorasGastas;
+    private Double mediaHorasPorTarefa;
 
 }

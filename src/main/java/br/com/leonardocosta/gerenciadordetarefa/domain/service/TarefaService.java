@@ -1,5 +1,6 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.service;
 
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.TarefaListarTarefaAntigaProjection;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Tarefa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.exception.NotFoundException;
@@ -48,8 +49,8 @@ public class TarefaService {
     }
 
 
-    public List<Tarefa> listarTarefasPendentesMaisAntigas() {
-        return repository.listarTarefasPendentes();
+    public List<TarefaListarTarefaAntigaProjection> listarTarefasPendentesMaisAntigas() {
+        return repository.listarTarefasPendentesSemPessoa();
     }
 
     private void validarTarefaParaConclusao(Tarefa tarefa) {

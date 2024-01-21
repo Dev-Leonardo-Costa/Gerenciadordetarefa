@@ -8,7 +8,6 @@ import br.com.leonardocosta.gerenciadordetarefa.domain.repository.PessoaReposito
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,6 +47,10 @@ public class PessoaService {
     public List<PessoaDTO> listarInformacoesPessoas() {
         List<Pessoa> pessoas = repository.findAll();
         return getPessoaDTOS(pessoas);
+    }
+
+    public List<PessoaGastosDTO> buscarPessoasPorNomeEPeriodo(String nome, Date dataInicio, Date dataFim) {
+        return repository.buscarPessoasPorNomeEPeriodo(nome, dataInicio, dataFim);
     }
 
     private List<PessoaDTO> getPessoaDTOS(List<Pessoa> pessoas) {

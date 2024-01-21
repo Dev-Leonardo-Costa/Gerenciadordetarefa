@@ -1,6 +1,7 @@
 package br.com.leonardocosta.gerenciadordetarefa.controller.impl;
 
 import br.com.leonardocosta.gerenciadordetarefa.controller.TarefaController;
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.TarefaListarTarefaAntigaProjection;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Tarefa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.service.TarefaService;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.TarefaCreateDTO;
@@ -40,8 +41,8 @@ public class TarefaControllerImpl implements TarefaController {
 
 
     @Override
-    public ResponseEntity<List<Tarefa>> listarTarefasPendentesMaisAntigas() {
-        List<Tarefa> tarefas = service.listarTarefasPendentesMaisAntigas();
+    public ResponseEntity<List<TarefaListarTarefaAntigaProjection>> listarTarefasPendentes() {
+        List<TarefaListarTarefaAntigaProjection> tarefas = service.listarTarefasPendentesMaisAntigas();
         return ResponseEntity.ok(tarefas);
     }
 

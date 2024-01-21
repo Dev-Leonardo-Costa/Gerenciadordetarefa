@@ -1,6 +1,6 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.repository;
 
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.DepartamentoDTO;
+import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaGastosDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,4 +24,15 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
             "ORDER BY p.id", nativeQuery = true)
     List<Pessoa> listarPessoas();
 
+    @Query(value = "SELECT p.nome AS nome, AVG(t.duracao) AS mediaHorasPorTarefa " +
+            "FROM pessoa p " +
+            "JOIN tarefa t ON p.id = t.id_pessoa " +
+            "WHERE p.nome = :nome " +
+            "AND t.prazo BETWEEN :dataInicio AND :dataFim " +
+            "GROUP BY p.nome", nativeQuery = true)
+    List<PessoaGastosDTO> buscarPessoasPorNomeEPeriodo(
+            @Param("nome") String nome,
+            @Param("dataInicio") Date dataInicio,
+            @Param("dataFim") Date dataFim
+    );
 }
