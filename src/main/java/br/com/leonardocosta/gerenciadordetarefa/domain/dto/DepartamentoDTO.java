@@ -14,9 +14,9 @@ public class DepartamentoDTO {
 
     private String departamento;
 
-    private Long qtdPessoas;
+    private Integer qtdPessoas;
 
-    private Long qtdTarefas;
+    private Integer qtdTarefas;
 
 
     public static List<DepartamentoDTO> getDepartamentoDTOS(List<DepartamentoProjection> projections) {

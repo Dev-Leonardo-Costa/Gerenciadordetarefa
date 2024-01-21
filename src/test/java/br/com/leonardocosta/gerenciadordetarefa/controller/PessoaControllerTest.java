@@ -4,33 +4,32 @@ import br.com.leonardocosta.gerenciadordetarefa.controller.impl.PessoaController
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaCreateDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaPorNomeEPeriodoProjection;
-import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Departamento;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.service.PessoaService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+@Profile("test")
+@SpringBootTest
 class PessoaControllerTest {
 
     public static final Long PESSOA_ID = 1L;
-    @InjectMocks
     PessoaController pessoaController;
 
-    @Mock
     private PessoaService pessoaService;
 
     @BeforeEach
@@ -53,8 +52,8 @@ class PessoaControllerTest {
     @Test
     public void deveRemoverUmaPessoa() {
         Pessoa pessoaExiste = new Pessoa();
-        when(pessoaService.buscarPorId(eq(PESSOA_ID))).thenReturn(pessoaExiste);
-        ResponseEntity<Void> response = pessoaController.remover(PESSOA_ID);
+        when(pessoaService.buscarPorId(eq(4L))).thenReturn(pessoaExiste);
+        ResponseEntity<Void> response = pessoaController.remover(4L);
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
         verify(pessoaService, times(1)).removerPessoa(eq(pessoaExiste.getId()));
     }
@@ -67,6 +66,7 @@ class PessoaControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(pessoasDTO, response.getBody());
         verify(pessoaService, times(1)).listarInformacoesPessoas();
+        verifyNoMoreInteractions(pessoaService);
     }
 
     @Test
@@ -85,6 +85,7 @@ class PessoaControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(resultadoSimulado, response.getBody());
         verify(pessoaService, times(1)).buscarPessoasPorNomeEPeriodo(eq(nome), eq(dataInicio), eq(dataFim));
+        verifyNoMoreInteractions(pessoaService);
     }
 
 }
