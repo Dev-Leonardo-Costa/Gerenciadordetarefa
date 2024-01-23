@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/gerenciamentodetarefa
+    username: postgres
+    password: comi1bolo
     driver-class-name: org.postgresql.Driver

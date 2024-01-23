@@ -1,28 +1,31 @@
 # Primeira etapa: Construir a aplicação
-FROM maven:3.9.5-amazoncorretto-17 AS build
+FROM ubuntu:latest AS build
 
-WORKDIR /workspace
+# Atualizar o sistema e instalar o JDK e o Maven
+RUN apt-get update && \
+    apt-get install -y openjdk-17-jdk maven
 
-# Copie o pom.xml e baixe as dependências, isso melhora o cache do Docker
-COPY pom.xml .
-RUN mvn dependency:go-offline
+# Configurar o diretório de trabalho
+WORKDIR /app
 
-# Copie o código fonte e construa o JAR
+# Copiar os arquivos necessários para o diretório de trabalho
 COPY src src
-ARG MAVEN_SKIP_TEST=false
-RUN if [ "$MAVEN_SKIP_TEST" = "true" ] ; then mvn clean package -DskipTests ; else mvn clean package ; fi
+COPY pom.xml .
 
-# Segunda etapa: Rodar a aplicação
-FROM amazoncorretto:17-alpine-jdk
+# Baixar as dependências do Maven e construir o projeto
+RUN mvn clean package -DskipTests
 
-LABEL maintainer="Leonardo Costa"
-LABEL version="1.0.0"
-LABEL description="API para gerenciamento de tarefas"
-LABEL name="Gerenciador de Tarefas"
+# Segunda etapa: Criar uma imagem mais leve com apenas o JAR
+FROM openjdk:17-jdk-slim
 
+# Configurar o diretório de trabalho
+WORKDIR /app
+
+# Copiar o JAR da primeira etapa para a segunda
+COPY --from=build /app/target/gerenciadordetarefa-1.0.0.jar app.jar
+
+# Expor a porta 8080 (se necessário)
 EXPOSE 8080
 
-# Copie o JAR da primeira etapa
-COPY --from=build /workspace/target/Tech-0.0.1-SNAPSHOT.jar app.jar
-
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+# Comando para iniciar a aplicação quando o contêiner for executado
+ENTRYPOINT ["java", "-jar", "app.jar"]
