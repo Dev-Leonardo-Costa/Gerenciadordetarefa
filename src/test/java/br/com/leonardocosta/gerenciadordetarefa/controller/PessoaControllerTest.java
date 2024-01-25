@@ -8,12 +8,10 @@ import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.service.PessoaService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@Profile("test")
+@ActiveProfiles("test")
 @SpringBootTest
 class PessoaControllerTest {
 
