@@ -19,7 +19,7 @@ public class TarefaCreateDTO {
     private Date prazo;
     private Long departamento;
     private int duracao;
-    private Boolean finalizado;
+    private boolean finalizado;
 
 
     public static Tarefa toModel(TarefaCreateDTO tarefaDTO) {
@@ -31,7 +31,6 @@ public class TarefaCreateDTO {
         tarefa.setPrazo(tarefaDTO.getPrazo());
         tarefa.setDepartamento(departamento);
         tarefa.setDuracao(tarefaDTO.getDuracao());
-        tarefa.setFinalizado(false);
         return tarefa;
     }
 
@@ -43,7 +42,7 @@ public class TarefaCreateDTO {
         dto.setPrazo(tarefa.getPrazo());
         dto.setDepartamento(tarefa.getDepartamento().getId());
         dto.setDuracao(tarefa.getDuracao());
-        dto.setFinalizado(tarefa.getFinalizado());
+        dto.setFinalizado(tarefa.isFinalizado());
         return dto;
     }
 

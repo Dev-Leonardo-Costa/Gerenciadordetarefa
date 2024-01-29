@@ -12,7 +12,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 @Entity
 @Table(name = "TAREFA")
@@ -33,7 +32,7 @@ public class Tarefa implements Serializable {
 
     private int duracao;
 
-    private Boolean finalizado = false;
+    private boolean finalizado;
 
     @ManyToOne
     @JoinColumn(name = "id_pessoa")
@@ -44,7 +43,18 @@ public class Tarefa implements Serializable {
     private Departamento departamento;
 
     public Boolean isFinalizado() {
-        return finalizado;
+        return finalizado = false;
+    }
+
+    public Tarefa(Long id, String titulo, String descricao, Date prazo, int duracao, Pessoa pessoa, Departamento departamento) {
+        this.id = id;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.prazo = prazo;
+        this.duracao = duracao;
+        this.finalizado = false;
+        this.pessoa = pessoa;
+        this.departamento = departamento;
     }
 
 }
