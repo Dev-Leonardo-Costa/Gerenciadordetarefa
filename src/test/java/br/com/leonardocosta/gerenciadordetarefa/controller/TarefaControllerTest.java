@@ -1,8 +1,8 @@
 package br.com.leonardocosta.gerenciadordetarefa.controller;
 
-import br.com.leonardocosta.gerenciadordetarefa.controller.impl.TarefaControllerImpl;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.TarefaCreateDTO;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.TarefaListarTarefaAntigaProjection;
+import br.com.leonardocosta.gerenciadordetarefa.api.controller.impl.TarefaControllerImpl;
+import br.com.leonardocosta.gerenciadordetarefa.dto.TarefaCreateDTO;
+import br.com.leonardocosta.gerenciadordetarefa.dto.TarefaListarTarefaAntigaProjection;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Tarefa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.service.TarefaService;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@Profile("test")
+@ActiveProfiles("test")
 @SpringBootTest
 class TarefaControllerTest {
 

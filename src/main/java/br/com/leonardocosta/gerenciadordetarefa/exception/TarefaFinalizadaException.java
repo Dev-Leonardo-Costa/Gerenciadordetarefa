@@ -1,4 +1,4 @@
-package br.com.leonardocosta.gerenciadordetarefa.domain.exception;
+package br.com.leonardocosta.gerenciadordetarefa.exception;
 
 public class TarefaFinalizadaException extends RuntimeException{
 

@@ -1,4 +1,4 @@
-package br.com.leonardocosta.gerenciadordetarefa.domain.dto;
+package br.com.leonardocosta.gerenciadordetarefa.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

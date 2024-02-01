@@ -1,12 +1,10 @@
 package br.com.leonardocosta.gerenciadordetarefa.controller;
 
-import br.com.leonardocosta.gerenciadordetarefa.controller.impl.DepartamentoControllerImpl;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.DepartamentoDTO;
+import br.com.leonardocosta.gerenciadordetarefa.api.controller.impl.DepartamentoControllerImpl;
+import br.com.leonardocosta.gerenciadordetarefa.dto.DepartamentoDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.service.DepartamentoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;

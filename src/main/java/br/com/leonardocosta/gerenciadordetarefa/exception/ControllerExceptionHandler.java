@@ -1,21 +1,22 @@
-package br.com.leonardocosta.gerenciadordetarefa.controller.exception;
+package br.com.leonardocosta.gerenciadordetarefa.exception;
 
-import br.com.leonardocosta.gerenciadordetarefa.domain.exception.NotFoundException;
-import br.com.leonardocosta.gerenciadordetarefa.domain.exception.StandarError;
-import br.com.leonardocosta.gerenciadordetarefa.domain.exception.TarefaFinalizadaException;
+import br.com.leonardocosta.gerenciadordetarefa.exception.NotFoundException;
+import br.com.leonardocosta.gerenciadordetarefa.exception.StandarError;
+import br.com.leonardocosta.gerenciadordetarefa.exception.TarefaFinalizadaException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import static java.time.LocalDateTime.now;
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.CONFLICT;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
-    ResponseEntity<StandarError> handleNotFoundException(final NotFoundException ex, final HttpServletRequest request) {
+    public ResponseEntity<StandarError> handleNotFoundException(final NotFoundException ex, final HttpServletRequest request) {
         return ResponseEntity.status(NOT_FOUND)
                 .body(
                         StandarError.builder()
@@ -29,7 +30,7 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(TarefaFinalizadaException.class)
-    ResponseEntity<StandarError> handleTarefaFinalizadaException(final TarefaFinalizadaException ex, final HttpServletRequest request) {
+    public ResponseEntity<StandarError> handleTarefaFinalizadaException(final TarefaFinalizadaException ex, final HttpServletRequest request) {
         return ResponseEntity.status(CONFLICT)
                 .body(
                         StandarError.builder()

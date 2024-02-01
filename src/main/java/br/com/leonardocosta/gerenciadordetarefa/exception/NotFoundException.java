@@ -1,4 +1,4 @@
-package br.com.leonardocosta.gerenciadordetarefa.domain.exception;
+package br.com.leonardocosta.gerenciadordetarefa.exception;
 
 public class NotFoundException extends RuntimeException{
     public NotFoundException(String message) {

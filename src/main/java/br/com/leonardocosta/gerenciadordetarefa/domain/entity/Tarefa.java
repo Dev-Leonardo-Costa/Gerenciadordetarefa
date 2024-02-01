@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.Date;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "TAREFA")
@@ -33,7 +33,7 @@ public class Tarefa implements Serializable {
 
     private int duracao;
 
-    private Boolean finalizado = false;
+    private Boolean finalizado;
 
     @ManyToOne
     @JoinColumn(name = "id_pessoa")

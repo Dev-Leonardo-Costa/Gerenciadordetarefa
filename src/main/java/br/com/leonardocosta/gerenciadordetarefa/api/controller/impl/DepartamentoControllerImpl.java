@@ -1,8 +1,7 @@
-package br.com.leonardocosta.gerenciadordetarefa.controller.impl;
+package br.com.leonardocosta.gerenciadordetarefa.api.controller.impl;
 
-import br.com.leonardocosta.gerenciadordetarefa.controller.DepartamentoController;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.DepartamentoDTO;
-import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Departamento;
+import br.com.leonardocosta.gerenciadordetarefa.api.controller.DepartamentoController;
+import br.com.leonardocosta.gerenciadordetarefa.dto.DepartamentoDTO;
 import br.com.leonardocosta.gerenciadordetarefa.domain.service.DepartamentoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

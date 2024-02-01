@@ -1,8 +1,8 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.service;
 
 
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaCreateDTO;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaPorNomeEPeriodoProjection;
+import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaCreateDTO;
+import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaPorNomeEPeriodoProjection;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Departamento;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.repository.PessoaRepository;

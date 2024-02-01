@@ -1,10 +1,10 @@
-package br.com.leonardocosta.gerenciadordetarefa.controller.impl;
+package br.com.leonardocosta.gerenciadordetarefa.api.controller.impl;
 
-import br.com.leonardocosta.gerenciadordetarefa.controller.TarefaController;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.TarefaListarTarefaAntigaProjection;
+import br.com.leonardocosta.gerenciadordetarefa.api.controller.TarefaController;
+import br.com.leonardocosta.gerenciadordetarefa.dto.TarefaListarTarefaAntigaProjection;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Tarefa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.service.TarefaService;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.TarefaCreateDTO;
+import br.com.leonardocosta.gerenciadordetarefa.dto.TarefaCreateDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;

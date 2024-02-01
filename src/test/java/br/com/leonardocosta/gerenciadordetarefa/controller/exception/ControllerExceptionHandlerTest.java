@@ -1,9 +1,10 @@
 package br.com.leonardocosta.gerenciadordetarefa.controller.exception;
 
 
-import br.com.leonardocosta.gerenciadordetarefa.domain.exception.NotFoundException;
-import br.com.leonardocosta.gerenciadordetarefa.domain.exception.StandarError;
-import br.com.leonardocosta.gerenciadordetarefa.domain.exception.TarefaFinalizadaException;
+import br.com.leonardocosta.gerenciadordetarefa.exception.ControllerExceptionHandler;
+import br.com.leonardocosta.gerenciadordetarefa.exception.NotFoundException;
+import br.com.leonardocosta.gerenciadordetarefa.exception.StandarError;
+import br.com.leonardocosta.gerenciadordetarefa.exception.TarefaFinalizadaException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
