@@ -1,8 +1,7 @@
-package br.com.leonardocosta.gerenciadordetarefa.domain.dto;
+package br.com.leonardocosta.gerenciadordetarefa.dto;
 
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Departamento;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
-import ch.qos.logback.classic.spi.LoggingEventVO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

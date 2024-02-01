@@ -1,6 +1,6 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.entity;
 
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaCreateDTO;
+import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaCreateDTO;
 import jakarta.persistence.*;
 import lombok.*;
 

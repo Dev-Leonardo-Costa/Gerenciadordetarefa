@@ -1,12 +1,12 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.service;
 
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.TarefaListarTarefaAntigaProjection;
+import br.com.leonardocosta.gerenciadordetarefa.dto.TarefaListarTarefaAntigaProjection;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Tarefa;
-import br.com.leonardocosta.gerenciadordetarefa.domain.exception.NotFoundException;
-import br.com.leonardocosta.gerenciadordetarefa.domain.exception.TarefaFinalizadaException;
+import br.com.leonardocosta.gerenciadordetarefa.exception.NotFoundException;
+import br.com.leonardocosta.gerenciadordetarefa.exception.TarefaFinalizadaException;
 import br.com.leonardocosta.gerenciadordetarefa.domain.repository.TarefaRepository;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.TarefaCreateDTO;
+import br.com.leonardocosta.gerenciadordetarefa.dto.TarefaCreateDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

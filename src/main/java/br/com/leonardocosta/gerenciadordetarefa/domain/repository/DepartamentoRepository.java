@@ -1,7 +1,6 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.repository;
 
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.DepartamentoDTO;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.DepartamentoProjection;
+import br.com.leonardocosta.gerenciadordetarefa.dto.DepartamentoProjection;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Departamento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -1,17 +1,14 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.service;
 
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.DepartamentoDTO;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.DepartamentoProjection;
+import br.com.leonardocosta.gerenciadordetarefa.dto.DepartamentoDTO;
+import br.com.leonardocosta.gerenciadordetarefa.dto.DepartamentoProjection;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Departamento;
-import br.com.leonardocosta.gerenciadordetarefa.domain.exception.NotFoundException;
+import br.com.leonardocosta.gerenciadordetarefa.exception.NotFoundException;
 import br.com.leonardocosta.gerenciadordetarefa.domain.repository.DepartamentoRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Collections;

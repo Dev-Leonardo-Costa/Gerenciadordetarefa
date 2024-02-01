@@ -1,4 +1,4 @@
-package br.com.leonardocosta.gerenciadordetarefa.domain.dto;
+package br.com.leonardocosta.gerenciadordetarefa.dto;
 
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Departamento;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Tarefa;

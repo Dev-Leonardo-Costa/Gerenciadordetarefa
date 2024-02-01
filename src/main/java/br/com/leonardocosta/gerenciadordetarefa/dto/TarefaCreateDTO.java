@@ -1,4 +1,4 @@
-package br.com.leonardocosta.gerenciadordetarefa.domain.dto;
+package br.com.leonardocosta.gerenciadordetarefa.dto;
 
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Departamento;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Tarefa;
@@ -13,7 +13,6 @@ import java.util.Date;
 @Data
 public class TarefaCreateDTO {
 
-    private Long id;
     private String titulo;
     private String descricao;
     private Date prazo;
@@ -36,13 +35,12 @@ public class TarefaCreateDTO {
 
     public static TarefaCreateDTO fromModel(Tarefa tarefa) {
         TarefaCreateDTO dto = new TarefaCreateDTO();
-        dto.setId(tarefa.getId());
         dto.setTitulo(tarefa.getTitulo());
         dto.setDescricao(tarefa.getDescricao());
         dto.setPrazo(tarefa.getPrazo());
         dto.setDepartamento(tarefa.getDepartamento().getId());
         dto.setDuracao(tarefa.getDuracao());
-        dto.setFinalizado(tarefa.isFinalizado());
+        dto.setFinalizado(tarefa.getFinalizado());
         return dto;
     }
 

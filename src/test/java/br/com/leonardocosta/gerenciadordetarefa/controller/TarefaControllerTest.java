@@ -1,8 +1,8 @@
 package br.com.leonardocosta.gerenciadordetarefa.controller;
 
-import br.com.leonardocosta.gerenciadordetarefa.controller.impl.TarefaControllerImpl;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.TarefaCreateDTO;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.TarefaListarTarefaAntigaProjection;
+import br.com.leonardocosta.gerenciadordetarefa.api.controller.impl.TarefaControllerImpl;
+import br.com.leonardocosta.gerenciadordetarefa.dto.TarefaCreateDTO;
+import br.com.leonardocosta.gerenciadordetarefa.dto.TarefaListarTarefaAntigaProjection;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Tarefa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.service.TarefaService;
 import org.junit.jupiter.api.BeforeEach;

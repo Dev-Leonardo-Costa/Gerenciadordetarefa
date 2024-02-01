@@ -1,9 +1,10 @@
 package br.com.leonardocosta.gerenciadordetarefa.controller;
 
-import br.com.leonardocosta.gerenciadordetarefa.controller.impl.PessoaControllerImpl;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaCreateDTO;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaPorNomeEPeriodoProjection;
+import br.com.leonardocosta.gerenciadordetarefa.api.controller.PessoaController;
+import br.com.leonardocosta.gerenciadordetarefa.api.controller.impl.PessoaControllerImpl;
+import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaCreateDTO;
+import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaDTO;
+import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaPorNomeEPeriodoProjection;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.service.PessoaService;
 import org.junit.jupiter.api.BeforeEach;

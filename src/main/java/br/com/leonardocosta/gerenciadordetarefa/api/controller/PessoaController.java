@@ -1,10 +1,9 @@
-package br.com.leonardocosta.gerenciadordetarefa.controller;
+package br.com.leonardocosta.gerenciadordetarefa.api.controller;
 
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaCreateDTO;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaDTO;
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.PessoaPorNomeEPeriodoProjection;
-import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
-import br.com.leonardocosta.gerenciadordetarefa.domain.exception.StandarError;
+import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaCreateDTO;
+import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaDTO;
+import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaPorNomeEPeriodoProjection;
+import br.com.leonardocosta.gerenciadordetarefa.exception.StandarError;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

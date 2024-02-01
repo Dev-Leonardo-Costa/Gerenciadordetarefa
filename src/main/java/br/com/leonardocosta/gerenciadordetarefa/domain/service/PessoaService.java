@@ -1,16 +1,17 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.service;
 
-import br.com.leonardocosta.gerenciadordetarefa.domain.dto.*;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Departamento;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
-import br.com.leonardocosta.gerenciadordetarefa.domain.exception.NotFoundException;
+import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaCreateDTO;
+import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaDTO;
+import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaPorNomeEPeriodoProjection;
+import br.com.leonardocosta.gerenciadordetarefa.exception.NotFoundException;
 import br.com.leonardocosta.gerenciadordetarefa.domain.repository.PessoaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
