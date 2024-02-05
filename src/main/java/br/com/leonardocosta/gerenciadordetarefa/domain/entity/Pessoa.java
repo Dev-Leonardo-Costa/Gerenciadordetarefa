@@ -1,8 +1,10 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.entity;
 
-import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaCreateDTO;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.With;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -32,13 +34,4 @@ public class Pessoa implements Serializable {
     @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
     private List<Tarefa> tarefas = new ArrayList<>();
 
-    public int horas() {
-        return tarefas.stream()
-                .mapToInt(Tarefa::getDuracao)
-                .sum();
-    }
-
-    public PessoaCreateDTO toCreateDTO() {
-        return new PessoaCreateDTO().fromModel(this);
-    }
 }

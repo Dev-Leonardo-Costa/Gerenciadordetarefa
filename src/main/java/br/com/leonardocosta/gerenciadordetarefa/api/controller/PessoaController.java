@@ -1,8 +1,9 @@
 package br.com.leonardocosta.gerenciadordetarefa.api.controller;
 
-import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaCreateDTO;
-import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaDTO;
-import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaPorNomeEPeriodoProjection;
+import br.com.leonardocosta.gerenciadordetarefa.api.request.PessoaRequest;
+import br.com.leonardocosta.gerenciadordetarefa.api.response.PessoaPorNomeEPeriodoResponse;
+import br.com.leonardocosta.gerenciadordetarefa.api.response.PessoaResponse;
+import br.com.leonardocosta.gerenciadordetarefa.api.response.PessoaResponseList;
 import br.com.leonardocosta.gerenciadordetarefa.exception.StandarError;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -39,9 +40,9 @@ public interface PessoaController {
     })
     @Operation(summary = "Registra uma nova pessoa")
     @PostMapping
-    ResponseEntity<PessoaCreateDTO> registrar(
+    ResponseEntity<PessoaResponse> registrar(
             @Parameter(description = "Pessoa", required = true, example = "Leonardo Costa")
-            @RequestBody final PessoaCreateDTO pessoa
+            @RequestBody final PessoaRequest request
     );
 
     @ApiResponses(value = {
@@ -63,7 +64,7 @@ public interface PessoaController {
     })
     @Operation(summary = "Altera os dados de uma pessoa")
     @PutMapping("/{pessoaId}")
-    ResponseEntity<PessoaCreateDTO> alterar(@PathVariable final Long pessoaId, @RequestBody final PessoaCreateDTO pessoaUpdateDTO);
+    ResponseEntity<PessoaResponse> alterar(@PathVariable final Long pessoaId, @RequestBody final PessoaRequest request);
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Pessoa removida"),
@@ -95,7 +96,7 @@ public interface PessoaController {
     })
     @Operation(summary = "Busca todas as pessoas")
     @GetMapping
-    ResponseEntity<List<PessoaDTO>> listarPessoa();
+    ResponseEntity<List<PessoaResponseList>> listarPessoa();
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Pessoas encontradas"),
@@ -110,7 +111,7 @@ public interface PessoaController {
     })
     @Operation(summary = "Busca todas as pessoas por nome e pelo periodo")
     @GetMapping("/gastos")
-    ResponseEntity<List<PessoaPorNomeEPeriodoProjection>> calcularMediaHorasPorTarefa(
+    ResponseEntity<List<PessoaPorNomeEPeriodoResponse>> buscarMediaHorasPorTarefa(
             @RequestParam("nome") String nome,
             @RequestParam("dataInicio") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataInicio,
             @RequestParam("dataFim") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataFim

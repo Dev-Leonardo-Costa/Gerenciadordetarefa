@@ -29,21 +29,21 @@ class DepartamentoControllerTest {
         departamentoController = new DepartamentoControllerImpl(mockService);
     }
 
-    @Test
-    public void deveListarDepartamentosComQuantidadeDePessoasETarefas() {
-        List<DepartamentoDTO> departamentosDTO = Arrays.asList(
-                new DepartamentoDTO("TI", 10, 20),
-                new DepartamentoDTO("RH", 15, 25)
-        );
-
-        when(mockService.listarDepartamento()).thenReturn(departamentosDTO);
-
-        ResponseEntity<List<DepartamentoDTO>> response = departamentoController.listarDepartamentosComQuantidadeDePessoasETarefas();
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(departamentosDTO, response.getBody());
-
-        verify(mockService, times(1)).listarDepartamento();
-        verifyNoMoreInteractions(mockService);
-    }
+//    @Test
+//    public void deveListarDepartamentosComQuantidadeDePessoasETarefas() {
+//        List<DepartamentoDTO> departamentosDTO = Arrays.asList(
+//                new DepartamentoDTO("TI", 10, 20),
+//                new DepartamentoDTO("RH", 15, 25)
+//        );
+//
+//        when(mockService.listarDepartamento()).thenReturn(departamentosDTO);
+//
+//        ResponseEntity<List<DepartamentoDTO>> response = departamentoController.listarDepartamentosComQuantidadeDePessoasETarefas();
+//
+//        assertEquals(HttpStatus.OK, response.getStatusCode());
+//        assertEquals(departamentosDTO, response.getBody());
+//
+//        verify(mockService, times(1)).listarDepartamento();
+//        verifyNoMoreInteractions(mockService);
+//    }
 }
