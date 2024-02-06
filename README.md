@@ -55,4 +55,10 @@ O aplicativo estará disponível em http://localhost:8080. Você pode acessar a 
 ## Departamento
 ### [GET] busca departamentos com quantidade de pessoas e tarefas
 
+## Teste a API Remotamente
+
+Explore e teste os endpoints da API usando a interface Swagger hospedada no [Render](https://app-geranciador-de-tarefa.onrender.com/swagger-ui/index.html).
+
+**[Swagger Online](https://app-geranciador-de-tarefa.onrender.com/swagger-ui/index.html)**
+
 
