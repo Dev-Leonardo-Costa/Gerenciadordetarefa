@@ -32,13 +32,13 @@ public class TarefaControllerImpl implements TarefaController {
     }
 
     @Override
-    public ResponseEntity<Tarefa> alocar(final Long tarefaId, final Long pessoaId) {
+    public ResponseEntity<TarefaReponse> alocar(final Long tarefaId, final Long pessoaId) {
         service.alocar(tarefaId, pessoaId);
         return ResponseEntity.noContent().build();
     }
 
     @Override
-    public ResponseEntity<Tarefa> finalizarTarefa(final Long tarefaId) {
+    public ResponseEntity<TarefaReponse> finalizarTarefa(final Long tarefaId) {
         service.finalizarTarefa(tarefaId);
         return ResponseEntity.ok().build();
     }
