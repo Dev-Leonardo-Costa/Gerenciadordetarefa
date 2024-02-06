@@ -1,6 +1,6 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.repository;
 
-import br.com.leonardocosta.gerenciadordetarefa.dto.TarefaListarTarefaAntigaProjection;
+import br.com.leonardocosta.gerenciadordetarefa.api.response.TarefaListarAntigasResponse;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Tarefa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,7 +21,7 @@ public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
             "WHERE t.id_pessoa IS NULL " +
             "ORDER BY t.prazo ASC " +
             "LIMIT 3", nativeQuery = true)
-    List<TarefaListarTarefaAntigaProjection> listarTarefasPendentesSemPessoa();
+    List<TarefaListarAntigasResponse> listarTarefasPendentesSemPessoa();
 
 }
 

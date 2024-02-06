@@ -1,4 +1,4 @@
-package br.com.leonardocosta.gerenciadordetarefa.dto;
+package br.com.leonardocosta.gerenciadordetarefa.api.response;
 
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Departamento;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Tarefa;
@@ -11,15 +11,14 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class TarefaListarTarefaAntigaDTO {
+public class TarefaReponse {
 
+    private Long id;
     private String titulo;
-
+    private String descricao;
     private Date prazo;
-
-    private Departamento departamento;
-
+    private Long departamento;
+    private int duracao;
     private Boolean finalizado;
-
 
 }

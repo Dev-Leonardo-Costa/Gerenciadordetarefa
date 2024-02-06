@@ -1,10 +1,12 @@
 package br.com.leonardocosta.gerenciadordetarefa.api.controller.impl;
 
 import br.com.leonardocosta.gerenciadordetarefa.api.controller.TarefaController;
-import br.com.leonardocosta.gerenciadordetarefa.dto.TarefaListarTarefaAntigaProjection;
+import br.com.leonardocosta.gerenciadordetarefa.api.mapper.TarefaMapper;
+import br.com.leonardocosta.gerenciadordetarefa.api.request.TarefaRequest;
+import br.com.leonardocosta.gerenciadordetarefa.api.response.TarefaListarAntigasResponse;
+import br.com.leonardocosta.gerenciadordetarefa.api.response.TarefaReponse;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Tarefa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.service.TarefaService;
-import br.com.leonardocosta.gerenciadordetarefa.dto.TarefaCreateDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +24,11 @@ public class TarefaControllerImpl implements TarefaController {
     private final TarefaService service;
 
     @Override
-    public ResponseEntity<TarefaCreateDTO> registrarTarefa(final TarefaCreateDTO tarefa) {
-        final TarefaCreateDTO tarefaSalva = service.salvar(tarefa);
-        return ResponseEntity.status(CREATED).body(tarefaSalva);
+    public ResponseEntity<TarefaReponse> registrarTarefa(final TarefaRequest request) {
+        Tarefa tarefa = TarefaMapper.toTarefa(request);
+        Tarefa tarefaSalva = service.salvar(tarefa);
+        TarefaReponse reponse = TarefaMapper.toTarefaResponse(tarefaSalva);
+        return ResponseEntity.status(CREATED).body(reponse);
     }
 
     @Override
@@ -41,9 +45,8 @@ public class TarefaControllerImpl implements TarefaController {
 
 
     @Override
-    public ResponseEntity<List<TarefaListarTarefaAntigaProjection>> listarTarefasPendentes() {
-        List<TarefaListarTarefaAntigaProjection> tarefas = service.listarTarefasPendentesMaisAntigas();
-        return ResponseEntity.ok(tarefas);
+    public ResponseEntity<List<TarefaListarAntigasResponse>> listarTarefasPendentes() {
+        return ResponseEntity.ok(service.listarTarefasPendentesMaisAntigas());
     }
 
 }
