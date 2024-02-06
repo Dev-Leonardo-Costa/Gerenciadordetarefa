@@ -1,9 +1,10 @@
 package br.com.leonardocosta.gerenciadordetarefa.api.controller;
 
-import br.com.leonardocosta.gerenciadordetarefa.dto.TarefaListarTarefaAntigaProjection;
+import br.com.leonardocosta.gerenciadordetarefa.api.request.TarefaRequest;
+import br.com.leonardocosta.gerenciadordetarefa.api.response.TarefaListarAntigasResponse;
+import br.com.leonardocosta.gerenciadordetarefa.api.response.TarefaReponse;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Tarefa;
 import br.com.leonardocosta.gerenciadordetarefa.exception.StandarError;
-import br.com.leonardocosta.gerenciadordetarefa.dto.TarefaCreateDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -35,7 +36,7 @@ public interface TarefaController {
     })
     @Operation(summary = "Adiciona uma tarefa")
     @PostMapping
-    ResponseEntity<TarefaCreateDTO> registrarTarefa(@RequestBody TarefaCreateDTO tarefa);
+    ResponseEntity<TarefaReponse> registrarTarefa(@RequestBody TarefaRequest request);
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Tarefa alocada"),
@@ -95,6 +96,6 @@ public interface TarefaController {
     })
     @Operation(summary = "Busca 3 tarefas que estejam sem pessoa alocada com os prazos mais antigos")
     @GetMapping("/pendentes")
-    ResponseEntity<List<TarefaListarTarefaAntigaProjection>> listarTarefasPendentes();
+    ResponseEntity<List<TarefaListarAntigasResponse>> listarTarefasPendentes();
 
 }

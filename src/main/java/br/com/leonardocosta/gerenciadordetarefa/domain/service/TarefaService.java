@@ -1,12 +1,11 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.service;
 
-import br.com.leonardocosta.gerenciadordetarefa.dto.TarefaListarTarefaAntigaProjection;
+import br.com.leonardocosta.gerenciadordetarefa.api.response.TarefaListarAntigasResponse;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Tarefa;
 import br.com.leonardocosta.gerenciadordetarefa.exception.NotFoundException;
 import br.com.leonardocosta.gerenciadordetarefa.exception.TarefaFinalizadaException;
 import br.com.leonardocosta.gerenciadordetarefa.domain.repository.TarefaRepository;
-import br.com.leonardocosta.gerenciadordetarefa.dto.TarefaCreateDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,10 +22,8 @@ public class TarefaService {
     private final TarefaRepository repository;
     private final PessoaService pessoaService;
 
-    public TarefaCreateDTO salvar(TarefaCreateDTO tarefa) {
-        Tarefa entity = TarefaCreateDTO.toModel(tarefa);
-        repository.save(entity);
-        return TarefaCreateDTO.fromModel(entity);
+    public Tarefa salvar(Tarefa tarefa) {
+        return repository.save(tarefa);
     }
 
     public Tarefa alocar(final Long tarefaId, final Long pessoaId) {
@@ -49,11 +46,12 @@ public class TarefaService {
     }
 
 
-    public List<TarefaListarTarefaAntigaProjection> listarTarefasPendentesMaisAntigas() {
+    public List<TarefaListarAntigasResponse> listarTarefasPendentesMaisAntigas() {
         return repository.listarTarefasPendentesSemPessoa();
     }
 
     private void validarTarefaParaConclusao(Tarefa tarefa) {
+
         if (tarefa.isFinalizado()) {
             throw new TarefaFinalizadaException(ESTA_TAREFA_JA_FOI_CONCLUIDA);
         }
@@ -61,6 +59,7 @@ public class TarefaService {
         if (tarefa.getPessoa() == null) {
             throw new NotFoundException(ESTA_TAREFA_NAO_ESTA_ASSOCIADA);
         }
+
     }
 
 }

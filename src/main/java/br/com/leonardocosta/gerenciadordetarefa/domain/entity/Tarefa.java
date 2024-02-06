@@ -2,7 +2,6 @@ package br.com.leonardocosta.gerenciadordetarefa.domain.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,7 +32,7 @@ public class Tarefa implements Serializable {
 
     private int duracao;
 
-    private Boolean finalizado;
+    private Boolean finalizado = false;
 
     @ManyToOne
     @JoinColumn(name = "id_pessoa")

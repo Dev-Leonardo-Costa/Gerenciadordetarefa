@@ -1,6 +1,6 @@
 package br.com.leonardocosta.gerenciadordetarefa.api.controller;
 
-import br.com.leonardocosta.gerenciadordetarefa.dto.DepartamentoDTO;
+import br.com.leonardocosta.gerenciadordetarefa.api.response.DepartamentoResponse;
 import br.com.leonardocosta.gerenciadordetarefa.exception.StandarError;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -34,6 +34,6 @@ public interface DepartamentoController {
     })
     @Operation(summary = "Busca departamentos com quantidade de pessoas e tarefas")
     @GetMapping
-    ResponseEntity<List<DepartamentoDTO>> listarDepartamentosComQuantidadeDePessoasETarefas();
+    ResponseEntity<List<DepartamentoResponse>> listarDepartamentosComQuantidadeDePessoasETarefas();
 
 }

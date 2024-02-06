@@ -1,8 +1,7 @@
-package br.com.leonardocosta.gerenciadordetarefa.dto;
+package br.com.leonardocosta.gerenciadordetarefa.api.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import br.com.leonardocosta.gerenciadordetarefa.api.request.DepartamentoRequest;
+import lombok.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,7 +9,7 @@ import java.util.stream.Collectors;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DepartamentoDTO {
+public class DepartamentoResponse {
 
     private String departamento;
 
@@ -18,14 +17,14 @@ public class DepartamentoDTO {
 
     private Integer qtdTarefas;
 
-
-    public static List<DepartamentoDTO> getDepartamentoDTOS(List<DepartamentoProjection> projections) {
+    public static List<DepartamentoResponse> getDepartamentoResponses(List<DepartamentoRequest> projections) {
         return projections.stream()
-                .map(projection -> new DepartamentoDTO(
+                .map(projection -> new DepartamentoResponse(
                         projection.getDepartamento(),
                         projection.getQtdPessoas(),
                         projection.getQtdTarefas()
                 ))
                 .collect(Collectors.toList());
     }
+
 }

@@ -1,6 +1,6 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.repository;
 
-import br.com.leonardocosta.gerenciadordetarefa.dto.DepartamentoProjection;
+import br.com.leonardocosta.gerenciadordetarefa.api.request.DepartamentoRequest;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Departamento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,6 +19,6 @@ public interface DepartamentoRepository extends JpaRepository<Departamento, Long
             "LEFT JOIN pessoa p ON d.id = p.id_departamento " +
             "LEFT JOIN tarefa t ON d.id = t.id_departamento " +
             "GROUP BY d.nome", nativeQuery = true)
-    List<DepartamentoProjection> listarDepartamentosComQuantidadeDePessoasETarefas();
+    List<DepartamentoRequest> listarDepartamentosComQuantidadeDePessoasETarefas();
 
 }

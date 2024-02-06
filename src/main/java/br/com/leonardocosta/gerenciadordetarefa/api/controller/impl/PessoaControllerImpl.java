@@ -1,9 +1,11 @@
 package br.com.leonardocosta.gerenciadordetarefa.api.controller.impl;
 
 import br.com.leonardocosta.gerenciadordetarefa.api.controller.PessoaController;
-import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaCreateDTO;
-import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaDTO;
-import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaPorNomeEPeriodoProjection;
+import br.com.leonardocosta.gerenciadordetarefa.api.mapper.PessoaMapper;
+import br.com.leonardocosta.gerenciadordetarefa.api.request.PessoaRequest;
+import br.com.leonardocosta.gerenciadordetarefa.api.response.PessoaPorNomeEPeriodoResponse;
+import br.com.leonardocosta.gerenciadordetarefa.api.response.PessoaResponse;
+import br.com.leonardocosta.gerenciadordetarefa.api.response.PessoaResponseList;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import br.com.leonardocosta.gerenciadordetarefa.domain.service.PessoaService;
 import lombok.RequiredArgsConstructor;
@@ -25,16 +27,19 @@ public class PessoaControllerImpl implements PessoaController {
     private final PessoaService service;
 
     @Override
-    public ResponseEntity<PessoaCreateDTO> registrar(final PessoaCreateDTO pessoa) {
-        final PessoaCreateDTO pessoaSalvo = service.salvar(pessoa);
-        return ResponseEntity.status(CREATED).body(pessoaSalvo);
+    public ResponseEntity<PessoaResponse> registrar(PessoaRequest request) {
+        Pessoa pessoa = PessoaMapper.toPessoa(request);
+        Pessoa pessoaSalva = service.salvar(pessoa);
+        PessoaResponse response = PessoaMapper.toPessoaResponse(pessoaSalva);
+        return ResponseEntity.status(CREATED).body(response);
     }
 
     @Override
-    public ResponseEntity<PessoaCreateDTO> alterar(final Long pessoaId, final PessoaCreateDTO pessoaCreateDTO) {
-        final Pessoa alterar = service.alterar(pessoaId, pessoaCreateDTO);
-        final PessoaCreateDTO createDTO = PessoaCreateDTO.fromModel(alterar);
-        return ResponseEntity.ok(createDTO);
+    public ResponseEntity<PessoaResponse> alterar(Long pessoaId, PessoaRequest request) {
+        Pessoa pessoa = PessoaMapper.toPessoa(request);
+        Pessoa pessoaAlterada = service.alterar(pessoaId, pessoa);
+        PessoaResponse response = PessoaMapper.toPessoaResponse(pessoaAlterada);
+        return ResponseEntity.status(CREATED).body(response);
     }
 
     @Override
@@ -45,15 +50,13 @@ public class PessoaControllerImpl implements PessoaController {
     }
 
     @Override
-    public ResponseEntity<List<PessoaDTO>> listarPessoa() {
-        List<PessoaDTO> pessoasDTO = service.listarInformacoesPessoas();
-        return ResponseEntity.ok(pessoasDTO);
+    public ResponseEntity<List<PessoaResponseList>> listarPessoa() {
+        return ResponseEntity.ok(service.listarInformacoesPessoas());
     }
 
     @Override
-    public ResponseEntity<List<PessoaPorNomeEPeriodoProjection>> calcularMediaHorasPorTarefa(String nome, Date dataInicio, Date dataFim) {
-        List<PessoaPorNomeEPeriodoProjection> resultado = service.buscarPessoasPorNomeEPeriodo(nome, dataInicio, dataFim);
-        return ResponseEntity.ok(resultado);
+    public ResponseEntity<List<PessoaPorNomeEPeriodoResponse>> buscarMediaHorasPorTarefa(String nome, Date dataInicio, Date dataFim) {
+        return ResponseEntity.ok(service.buscarPessoasPorNomeEPeriodo(nome, dataInicio, dataFim));
     }
 
 }

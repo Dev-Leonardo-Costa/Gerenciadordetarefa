@@ -1,7 +1,7 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.repository;
 
-import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaDTO;
-import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaPorNomeEPeriodoProjection;
+import br.com.leonardocosta.gerenciadordetarefa.api.response.PessoaPorNomeEPeriodoResponse;
+import br.com.leonardocosta.gerenciadordetarefa.api.response.PessoaResponseList;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,7 +23,7 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
             "LEFT JOIN departamento d ON p.id_departamento = d.id " +
             "GROUP BY p.id, p.nome, d.nome " +
             "ORDER BY p.id", nativeQuery = true)
-    List<PessoaDTO> listarPessoas();
+    List<PessoaResponseList> listarPessoas();
 
     @Query(value = "SELECT p.nome, AVG(t.duracao) AS mediaHorasPorTarefa " +
             "FROM pessoa p " +
@@ -33,7 +33,7 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
             "AND :dataFim " +
             "AND t.finalizado = true " +
             "GROUP BY p.nome", nativeQuery = true)
-    List<PessoaPorNomeEPeriodoProjection> buscarPessoasPorNomeEPeriodo(
+    List<PessoaPorNomeEPeriodoResponse> buscarPessoasPorNomeEPeriodo(
             @Param("nome") String nome,
             @Param("dataInicio") Date dataInicio,
             @Param("dataFim") Date dataFim

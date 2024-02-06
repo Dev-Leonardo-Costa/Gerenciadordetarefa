@@ -1,10 +1,9 @@
 package br.com.leonardocosta.gerenciadordetarefa.domain.service;
 
+import br.com.leonardocosta.gerenciadordetarefa.api.response.PessoaPorNomeEPeriodoResponse;
+import br.com.leonardocosta.gerenciadordetarefa.api.response.PessoaResponseList;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Departamento;
 import br.com.leonardocosta.gerenciadordetarefa.domain.entity.Pessoa;
-import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaCreateDTO;
-import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaDTO;
-import br.com.leonardocosta.gerenciadordetarefa.dto.PessoaPorNomeEPeriodoProjection;
 import br.com.leonardocosta.gerenciadordetarefa.exception.NotFoundException;
 import br.com.leonardocosta.gerenciadordetarefa.domain.repository.PessoaRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,11 +20,9 @@ public class PessoaService {
 
     private final DepartamentoService departamentoService;
 
-    public PessoaCreateDTO salvar(final PessoaCreateDTO pessoaDTO) {
-        final Pessoa entity = PessoaCreateDTO.toModel(pessoaDTO);
-        departamentoService.buscarPorIdDepartamentoParaPessoa(entity.getDepartamento().getId());
-        repository.save(entity);
-        return PessoaCreateDTO.fromModel(entity);
+    public Pessoa salvar(final Pessoa pessoa) {
+        departamentoService.buscarPorIdDepartamentoParaPessoa(pessoa.getDepartamento().getId());
+        return repository.save(pessoa);
     }
 
     public Pessoa buscarPorId(final Long pessoaId) {
@@ -37,19 +34,19 @@ public class PessoaService {
         repository.deleteById(pessoaId);
     }
 
-    public Pessoa alterar(final Long pessoaId, final PessoaCreateDTO pessoaCreateDTO) {
-        final Pessoa pessoaExistente = buscarPorId(pessoaId);
-        pessoaExistente.setNome(pessoaCreateDTO.getNome());
-        Departamento departamento = departamentoService.buscarPorId(pessoaCreateDTO.getDepartamento());
+    public Pessoa alterar(final Long pessoaId, final Pessoa pessoa) {
+        Pessoa pessoaExistente = buscarPorId(pessoaId);
+        pessoaExistente.setNome(pessoa.getNome());
+        Departamento departamento = departamentoService.buscarPorId(pessoa.getDepartamento().getId());
         pessoaExistente.setDepartamento(departamento);
         return repository.save(pessoaExistente);
     }
 
-    public List<PessoaDTO> listarInformacoesPessoas() {
+    public List<PessoaResponseList> listarInformacoesPessoas() {
         return repository.listarPessoas();
     }
 
-    public List<PessoaPorNomeEPeriodoProjection> buscarPessoasPorNomeEPeriodo(String nome, Date dataInicio, Date dataFim) {
+    public List<PessoaPorNomeEPeriodoResponse> buscarPessoasPorNomeEPeriodo(String nome, Date dataInicio, Date dataFim) {
         return repository.buscarPessoasPorNomeEPeriodo(nome, dataInicio, dataFim);
     }
 
