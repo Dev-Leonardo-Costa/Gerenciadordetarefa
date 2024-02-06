@@ -55,7 +55,7 @@ public interface TarefaController {
     })
     @Operation(summary = "Aloca uma tarefa para uma pessoa")
     @PutMapping("/alocar/{tarefaId}")
-    ResponseEntity<Tarefa> alocar(@PathVariable final Long tarefaId, @RequestParam final Long pessoaId);
+    ResponseEntity<TarefaReponse> alocar(@PathVariable final Long tarefaId, @RequestParam final Long pessoaId);
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Tarefa finalizada"),
@@ -77,7 +77,7 @@ public interface TarefaController {
     })
     @Operation(summary = "Finaliza uma tarefa")
     @PutMapping("/finalizar/{tarefaId}")
-    ResponseEntity<Tarefa> finalizarTarefa(
+    ResponseEntity<TarefaReponse> finalizarTarefa(
             @Parameter(description = "Tarefa", required = true, example = "1") @PathVariable Long tarefaId
     );
 
